@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>15 Anos Ana Júlia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>15 Anos - Ana Júlia | Convite Especial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e90ff;
-            --accent: #ff69b4;
-            --dark: #07090e;
-            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-main: #d4af37;
+            --gold-dark: #996515;
+            --dark-bg: #05070a;
+            --card-bg: #fcfbf9;
+            --accent-pink: #d87093;
+            --accent-blue: #4682b4;
         }
 
         * {
@@ -20,50 +23,42 @@
         }
 
         body {
-            background-color: var(--dark);
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(70, 130, 180, 0.06) 0%, transparent 40%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow: hidden;
-            perspective: 1500px;
-        }
-
-        .bg-glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(30, 144, 255, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 105, 180, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
-            z-index: 0;
+            perspective: 1800px;
         }
 
         .invitation-container {
-            width: 380px;
-            height: 640px;
+            width: 400px;
+            height: 680px;
             position: relative;
             cursor: pointer;
             z-index: 2;
             transform-style: preserve-3d;
         }
 
-        /* Envelope Luxuoso */
+        /* --- ENVELOPE DE LUXO --- */
         .envelope {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #121622 0%, #080a0f 100%);
-            border-radius: 16px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 0 1px rgba(212, 175, 55, 0.2);
+            background: linear-gradient(145deg, #10141d 0%, #06080c 100%);
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(212, 175, 55, 0.3);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 10;
-            transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
         }
 
         .envelope-flap {
@@ -71,207 +66,235 @@
             top: 0;
             width: 0;
             height: 0;
-            border-left: 190px solid transparent;
-            border-right: 190px solid transparent;
-            border-top: 140px solid #1a2233;
+            border-left: 200px solid transparent;
+            border-right: 200px solid transparent;
+            border-top: 150px solid #182030;
             transform-origin: top;
-            transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1) 0.2s;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1) 0.2s;
             z-index: 12;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
         }
 
         .wax-seal {
             position: absolute;
-            top: 115px;
-            width: 64px;
-            height: 64px;
-            background: radial-gradient(circle, #f39c12 0%, #b8860b 100%);
+            top: 125px;
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, var(--gold-light) 0%, var(--gold-main) 60%, var(--gold-dark) 100%);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #080a0f;
-            font-family: 'Playfair Display', serif;
-            font-weight: bold;
-            font-size: 24px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.5), inset 0 2px 3px rgba(255,255,255,0.4);
+            color: #06080c;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 700;
+            font-size: 26px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.6);
             z-index: 13;
             transition: transform 0.4s ease, opacity 0.3s ease;
-            border: 2px solid #d4af37;
+            border: 2px solid var(--gold-light);
         }
 
-        .envelope-content {
+        .envelope-text {
             position: absolute;
-            bottom: 70px;
+            bottom: 60px;
             text-align: center;
             z-index: 5;
             transition: opacity 0.3s ease;
         }
 
-        .envelope-content h4 {
-            color: var(--gold);
-            font-size: 11px;
-            letter-spacing: 5px;
+        .envelope-text h4 {
+            color: var(--gold-main);
+            font-size: 10px;
+            letter-spacing: 6px;
             text-transform: uppercase;
             margin-bottom: 8px;
-            font-weight: 400;
+            font-weight: 300;
         }
 
-        .envelope-content h2 {
+        .envelope-text h2 {
             font-family: 'Great Vibes', cursive;
             color: #fff;
-            font-size: 38px;
-            margin-bottom: 15px;
+            font-size: 42px;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
         }
 
         .tap-instruction {
-            color: rgba(255,255,255,0.6);
-            font-size: 12px;
-            letter-spacing: 2px;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            animation: textGlow 2s infinite ease-in-out;
+            animation: pulseGlow 2s infinite ease-in-out;
         }
 
-        @keyframes textGlow {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.03); }
         }
 
-        /* Cartão Interno Sofisticado com Espaço para Foto */
+        /* --- CARTÃO INTERNO ESTILO LUXO (REQUINTE) --- */
         .card {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 25px 25px;
+            padding: 30px 25px;
             text-align: center;
             z-index: 1;
             opacity: 0;
-            transform: scale(0.85) translateY(30px);
-            transition: all 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s;
+            transform: scale(0.85) translateY(40px);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            /* Textura interna sutil clássica */
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* Borda interna decorativa de luxo */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
             border: 1px solid rgba(212, 175, 55, 0.3);
-            background-image: radial-gradient(#f8f9fa 15%, transparent 16%), radial-gradient(#f8f9fa 15%, transparent 16%);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
+            border-radius: 8px;
+            pointer-events: none;
         }
 
         .card-header span {
             font-size: 9px;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            color: #8c9bae;
+            color: #8c8275;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .card-header h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 42px;
-            color: var(--accent);
+            font-size: 48px;
+            color: var(--gold-dark);
             line-height: 1;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 4px rgba(255,105,180,0.15);
+            margin-bottom: 8px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
-        /* Moldura Elegante para a Foto */
-        .photo-frame {
-            width: 110px;
-            height: 110px;
+        .divider-gold {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-main), transparent);
             margin: 0 auto;
+        }
+
+        /* MOLDURA DE FOTO PREMIUM */
+        .photo-section {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+        }
+
+        .photo-frame-lux {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             padding: 4px;
-            background: linear-gradient(135deg, var(--gold), var(--accent));
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-main), var(--gold-dark));
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             position: relative;
         }
 
-        .photo-container {
+        .photo-inner {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             overflow: hidden;
-            background: #e2e8f0;
+            background: #e9ecef;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* Substitua o src abaixo pelo link da foto dela */
-        .photo-container img {
+        /* Substitua o src="" com a foto da debutante */
+        .photo-inner img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
         .photo-placeholder {
-            font-size: 11px;
-            color: #718096;
+            font-size: 10px;
+            color: #666;
             text-align: center;
             padding: 10px;
-            line-height: 1.3;
+            line-height: 1.2;
+            font-style: italic;
         }
 
-        .card-body {
+        /* BLOCO DE DETALHES ESTILIZADO */
+        .details-box {
+            background: #fff;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            padding: 14px 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             text-align: left;
-            background: #fdfdfe;
-            border: 1px solid #edf2f7;
-            border-radius: 12px;
-            padding: 12px 16px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
         }
 
-        .info-item {
+        .detail-row {
             display: flex;
             align-items: baseline;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             font-size: 12px;
         }
 
-        .info-item:last-child {
+        .detail-row:last-child {
             margin-bottom: 0;
         }
 
-        .info-title {
+        .detail-label {
+            font-family: 'Playfair Display', serif;
             font-weight: 600;
-            color: var(--primary);
-            width: 95px;
+            color: var(--gold-dark);
+            width: 90px;
             flex-shrink: 0;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
             font-size: 10px;
-            letter-spacing: 1px;
         }
 
-        .info-desc {
-            color: #4a5568;
+        .detail-value {
+            color: #333;
             font-weight: 500;
         }
 
-        .card-footer {
-            border-top: 1px dashed #cbd5e0;
-            padding-top: 10px;
+        .card-footer-text {
+            border-top: 1px dashed rgba(212, 175, 55, 0.3);
+            padding-top: 8px;
         }
 
-        .card-footer p {
+        .card-footer-text p {
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-size: 12px;
-            color: #4a5568;
+            color: #555;
             line-height: 1.3;
         }
 
-        /* Efeitos de Abertura */
+        /* --- ESTADO DE ABERTURA --- */
         .invitation-container.open .envelope-flap {
             transform: rotateX(180deg);
             z-index: 1;
         }
 
         .invitation-container.open .wax-seal,
-        .invitation-container.open .envelope-content {
+        .invitation-container.open .envelope-text {
             opacity: 0;
             pointer-events: none;
         }
@@ -286,71 +309,73 @@
             opacity: 1;
             transform: scale(1) translateY(0);
             z-index: 20;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 35px 70px rgba(0,0,0,0.7);
         }
     </style>
 </head>
 <body>
-
-    <div class="bg-glow"></div>
 
     <div class="invitation-container" id="inviteContainer" onclick="openInvitation()">
         <!-- Envelope de Luxo -->
         <div class="envelope" id="envelope">
             <div class="envelope-flap"></div>
             <div class="wax-seal">AJ</div>
-            <div class="envelope-content">
-                <h4>Convite Especial</h4>
+            <div class="envelope-text">
+                <h4>Celebração Exclusiva</h4>
                 <h2>Ana Júlia</h2>
-                <div class="tap-instruction">Toque para Abrir</div>
+                <div class="tap-instruction">Toque para Abrir o Convite</div>
             </div>
         </div>
 
-        <!-- Cartão Interno com Espaço para Foto e Layout Sofisticado -->
+        <!-- Cartão Interno de Luxo -->
         <div class="card">
             <div class="card-header">
-                <span>Celebração de 15 Anos</span>
+                <span>Baile de 15 Anos</span>
                 <h1>Ana Júlia</h1>
+                <div class="divider-gold" style="margin-top: 6px;"></div>
             </div>
 
-            <!-- Moldura da Foto da Debutante -->
-            <div class="photo-frame">
-                <div class="photo-container">
-                    <!-- Substitua o link abaixo dentro do src="" pela URL direta da foto dela -->
-                    <img src="" alt="Ana Júlia" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div class="photo-placeholder" style="display:none;">Coloque a foto aqui</div>
-                </div>
-            </div>
-
-            <div class="card-body">
-                <div class="info-item">
-                    <span class="info-title">Data:</span>
-                    <span class="info-desc">16 de Outubro</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-title">Horário:</span>
-                    <span class="info-desc">20:00 horas</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-title">Local:</span>
-                    <span class="info-desc">Rally Flores, Cascalho</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-title">Cores:</span>
-                    <span class="info-desc">Azul, Rosa e Prata</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-title">Confirmação:</span>
-                    <span class="info-desc">Até 20/09</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-title">Contato:</span>
-                    <span class="info-desc">(19) 99999-1494</span>
+            <!-- Moldura e Espaço para Foto -->
+            <div class="photo-section">
+                <div class="photo-frame-lux">
+                    <div class="photo-inner">
+                        <!-- Cole o link da foto da debutante no atributo src abaixo -->
+                        <img src="" alt="Ana Júlia" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div class="photo-placeholder" style="display:none;">Insira sua foto aqui</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="card-footer">
-                <p>"Sua presença é indispensável para tornar esta noite mágica e inesquecível."</p>
+            <!-- Informações do Evento -->
+            <div class="details-box">
+                <div class="detail-row">
+                    <span class="detail-label">Data:</span>
+                    <span class="detail-value">16 de Outubro</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Horário:</span>
+                    <span class="detail-value">20:00 horas</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Local:</span>
+                    <span class="detail-value">Rally Flores, Cascalho</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Paleta:</span>
+                    <span class="detail-value">Azul, Rosa e Prata</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">RSVP / Conf:</span>
+                    <span class="detail-value">Até 20/09</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Contato:</span>
+                    <span class="detail-value">(19) 99999-1494</span>
+                </div>
+            </div>
+
+            <div class="card-footer-text">
+                <p>"Sua presença é a honra mais esperada para tornar esta noite inesquecível."</p>
             </div>
         </div>
     </div>
