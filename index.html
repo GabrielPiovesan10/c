@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite 15 Anos - Ana Júlia</title>
+    <title>Convite de 15 Anos - Ana Júlia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -11,145 +12,240 @@
             padding: 0;
         }
         body {
-            font-family: 'Cinzel', 'Georgia', serif;
-            background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+            background-color: #0b0c10;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: 'Montserrat', sans-serif;
             overflow: hidden;
-            perspective: 1000px;
+            perspective: 1200px;
         }
-        .container {
-            width: 340px;
-            height: 500px;
+
+        .scene {
+            width: 360px;
+            height: 560px;
             position: relative;
             cursor: pointer;
-            transform-style: preserve-3d;
-            transition: transform 0.8s ease;
         }
-        .envelope {
+
+        /* Envelope */
+        .envelope-wrapper {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: #2b2b2b;
-            border-radius: 10px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, #1f2833 0%, #0b0c10 100%);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 3;
-            transition: opacity 0.5s ease;
+            z-index: 10;
+            transition: transform 0.8s ease, opacity 0.6s ease;
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
+
         .envelope-flap {
             position: absolute;
             top: 0;
             width: 0;
             height: 0;
-            border-left: 170px solid transparent;
-            border-right: 170px solid transparent;
-            border-top: 130px solid #3d3d3d;
+            border-left: 180px solid transparent;
+            border-right: 180px solid transparent;
+            border-top: 130px solid #2c3542;
             transform-origin: top;
-            transition: transform 0.6s ease;
-            z-index: 4;
+            transition: transform 0.6s ease 0.2s;
+            z-index: 12;
         }
+
+        .seal {
+            position: absolute;
+            top: 105px;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #f39c12 0%, #d4af37 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #0b0c10;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            z-index: 13;
+            transition: transform 0.3s ease;
+        }
+
         .envelope-text {
+            position: absolute;
+            bottom: 60px;
             color: #d4af37;
-            font-size: 18px;
-            letter-spacing: 2px;
-            text-align: center;
-            z-index: 5;
-            padding: 20px;
+            font-size: 14px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            font-weight: 300;
+            animation: pulse 2s infinite;
         }
-        .card {
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* Card Interno */
+        .invitation-card {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            padding: 30px 20px;
-            text-align: center;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            padding: 40px 25px;
+            text-align: center;
             z-index: 1;
-            border: 2px solid #d4af37;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease 0.4s;
+            border: 1px solid #e0e0e0;
         }
-        .open .envelope-flap {
+
+        .card-header h3 {
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .card-header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 52px;
+            color: #ff69b4;
+            margin-bottom: 0;
+        }
+
+        .card-body {
+            margin: 15px 0;
+            border-top: 1px solid #eaeaea;
+            border-bottom: 1px solid #eaeaea;
+            padding: 20px 0;
+            text-align: left;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #1e90ff;
+            width: 110px;
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            color: #555;
+        }
+
+        .card-footer p {
+            font-size: 13px;
+            color: #777;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* Estado Aberto */
+        .scene.open .envelope-flap {
             transform: rotateX(180deg);
+            z-index: 1;
         }
-        .open .envelope {
+
+        .scene.open .seal,
+        .scene.open .envelope-text {
             opacity: 0;
             pointer-events: none;
         }
-        h1 {
-            color: #1e90ff;
-            font-size: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+
+        .scene.open .envelope-wrapper {
+            transform: translateY(100%) scale(0.8);
+            opacity: 0;
+            pointer-events: none;
         }
-        h2 {
-            color: #ff69b4;
-            font-size: 26px;
-            margin: 5px 0 15px 0;
-            font-family: 'Brush Script MT', cursive;
-        }
-        .details {
-            font-size: 14px;
-            color: #444;
-            line-height: 1.8;
-            text-align: left;
-            border-top: 1px dashed #d4af37;
-            border-bottom: 1px dashed #d4af37;
-            padding: 15px 0;
-        }
-        .details strong {
-            color: #1e90ff;
-        }
-        .footer-text {
-            font-size: 13px;
-            color: #666;
-            font-style: italic;
+
+        .scene.open .invitation-card {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 20;
         }
     </style>
 </head>
 <body>
 
-    <div class="container" id="inviteCard" onclick="openEnvelope()">
-        <!-- Envelope Animado -->
-        <div class="envelope" id="envelope">
+    <div class="scene" id="scene" onclick="openInvite()">
+        <!-- Envelope -->
+        <div class="envelope-wrapper">
             <div class="envelope-flap"></div>
-            <div class="envelope-text">Toque para abrir o Convite</div>
+            <div class="seal">AJ</div>
+            <div class="envelope-text">Toque para Abrir</div>
         </div>
 
-        <!-- Conteúdo do Convite Profissional -->
-        <div class="card">
-            <div>
-                <h1>Festa de 15 Anos</h1>
-                <h2>Ana Júlia</h2>
-            </div>
-            
-            <div class="details">
-                <p><strong>Data:</strong> 16/10</p>
-                <p><strong>Horário:</strong> 20:00</p>
-                <p><strong>Local:</strong> Rally Flores, Cascalho</p>
-                <p><strong>Cores:</strong> Azul, Rosa e Prata</p>
-                <p><strong>Confirmação até:</strong> 20/09</p>
-                <p><strong>Contato:</strong> (19) 99999-1494</p>
+        <!-- Convite -->
+        <div class="invitation-card">
+            <div class="card-header">
+                <h3>Meus 15 Anos</h3>
+                <h1>Ana Júlia</h1>
             </div>
 
-            <div class="footer-text">
-                <p>Sua presença é essencial para tornar este momento inesquecível!</p>
+            <div class="card-body">
+                <div class="info-row">
+                    <span class="info-label">Data:</span>
+                    <span class="info-value">16 de Outubro</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Horário:</span>
+                    <span class="info-value">20:00</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Local:</span>
+                    <span class="info-value">Rally Flores, Cascalho</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Cores:</span>
+                    <span class="info-value">Azul, Rosa e Prata</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Confirmação:</span>
+                    <span class="info-value">Até 20/09</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Contato:</span>
+                    <span class="info-value">(19) 99999-1494</span>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <p>Sua presença tornará esta noite inesquecível. Conto com você!</p>
             </div>
         </div>
     </div>
 
     <script>
-        function openEnvelope() {
-            const card = document.getElementById('inviteCard');
-            card.classList.add('open');
+        function openInvite() {
+            const scene = document.getElementById('scene');
+            if (!scene.classList.contains('open')) {
+                scene.classList.add('open');
+            }
         }
     </script>
 
