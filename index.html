@@ -3,7 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ========================================== -->
+    <!-- META TAGS PARA WHATSAPP / REDES SOCIAIS    -->
+    <!-- ========================================== -->
     <title>Convite 15 Anos - Ana Julia</title>
+    <meta name="description" content="Você tem um convite muito especial! Clique para abrir e confirmar sua presença nos 15 anos da Ana Julia.">
+    
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:title" content="Convite Especial: 15 Anos - Ana Julia ✨">
+    <meta property="og:description" content="Venha celebrar o capítulo mais mágico da minha vida. Clique para abrir o convite!">
+    
+    <!-- AQUI FICA A IMAGEM QUE APARECE NO WHATSAPP -->
+    <!-- Quando você hospedar o site, coloque o link completo aqui, ex: https://seusite.com/sua-foto.JPG -->
+    <meta property="og:image" content="sua-foto.JPG">
+    
+    <!-- Diz aos aplicativos que é um site -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <!-- ========================================== -->
+
+    <!-- Fontes do Google -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -196,7 +216,6 @@
 
         .buttons-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px; }
         
-        /* O botão agora aciona o Modal em vez de ir direto pro WhatsApp */
         .btn {
             background: rgba(0, 0, 0, 0.6); border: 1px solid var(--prata); color: var(--prata-brilho);
             padding: 15px 30px; font-size: 0.9rem; font-family: 'Montserrat', sans-serif;
@@ -365,10 +384,7 @@
                 <!-- Botões -->
                 <div class="buttons-container fade-up delay-5">
                     <p class="rsvp-text">Confirme sua presença até 20/09</p>
-                    
-                    <!-- Mudamos o link para um onClick que abre o Modal -->
                     <button class="btn" onclick="abrirModal()">Confirmar Presença</button>
-                    
                     <a href="https://maps.google.com/?q=Raliflores,+Cascalho,+Cordeirópolis" target="_blank" class="btn">
                         Localização (Maps)
                     </a>
@@ -414,7 +430,6 @@
         }
         animar15Anos();
 
-
         // ======= ABRIR CONVITE =======
         function abrirConvite() {
             const cover = document.getElementById('coverScreen');
@@ -431,10 +446,9 @@
             criarParticulas();
         }
         
-        // ======= FUNÇÕES DO MODAL (NOVO) =======
+        // ======= FUNÇÕES DO MODAL =======
         function abrirModal() {
             document.getElementById('modalPresenca').classList.add('active');
-            // Dá um foco suave no input para facilitar
             setTimeout(() => {
                 document.getElementById('nomeConvidado').focus();
             }, 400);
@@ -442,7 +456,6 @@
         
         function fecharModal() {
             document.getElementById('modalPresenca').classList.remove('active');
-            // Limpa o campo caso a pessoa tenha desistido
             document.getElementById('nomeConvidado').value = "";
         }
         
@@ -454,23 +467,14 @@
                 return;
             }
             
-            // O número fornecido no início
             const numeroTelefone = "5519999191494"; 
-            
-            // A mensagem montada com o nome da pessoa
             const mensagem = `Olá! Eu, *${nomeInput}*, gostaria de confirmar minha presença nos 15 anos da Ana Julia!`;
-            
-            // Codifica a mensagem para o formato de URL do WhatsApp
             const textoCodificado = encodeURIComponent(mensagem);
-            
-            // Monta o link final
             const linkWhatsApp = `https://wa.me/${numeroTelefone}?text=${textoCodificado}`;
             
-            // Fecha o modal e abre o WhatsApp numa nova aba
             fecharModal();
             window.open(linkWhatsApp, '_blank');
         }
-
 
         // ======= CONTAGEM REGRESSIVA =======
         const dataAlvo = new Date(`2026-10-16T20:00:00`).getTime();
