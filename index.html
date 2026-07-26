@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convite 15 Anos - Ana Julia</title>
-    <!-- Fontes do Google -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Variáveis de Cores */
         :root {
             --azul-escuro: #0a1128;
             --prata: #e0e0e0;
@@ -17,11 +15,7 @@
             --rosa-escuro: #d58996;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: #000;
@@ -31,10 +25,9 @@
             align-items: center;
             min-height: 100vh;
             color: var(--prata);
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* Container Mobile */
         .mobile-container {
             width: 100%;
             max-width: 420px;
@@ -46,256 +39,188 @@
             box-shadow: 0 0 30px rgba(0,0,0,0.8);
         }
 
-        /* =========================================
-           TELA 1: CAPA (Efeito de Abertura Real)
-           ========================================= */
+        /* ================= TELA 1: CAPA ================= */
         .cover {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            pointer-events: auto;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 20; pointer-events: auto;
         }
 
-        /* As duas metades do convite (Portas/Abas) */
         .cover::before, .cover::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 50%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; width: 50%; height: 100%;
             background: linear-gradient(135deg, var(--azul-escuro) 0%, #121c3b 100%);
-            z-index: 1; /* Atrás dos textos da capa */
-            transition: transform 1.2s cubic-bezier(0.64, 0.05, 0.08, 1) 0.4s; /* O 0.4s faz as portas esperarem o texto sumir para abrir */
+            z-index: 1;
+            transition: transform 1.2s cubic-bezier(0.64, 0.05, 0.08, 1) 0.4s;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
         }
+        .cover::before { left: 0; border-right: 2px solid var(--rosa); }
+        .cover::after { right: 0; border-left: 2px solid var(--rosa); }
 
-        /* Lado Esquerdo */
-        .cover::before {
-            left: 0;
-            border-right: 2px solid var(--rosa);
-        }
-
-        /* Lado Direito */
-        .cover::after {
-            right: 0;
-            border-left: 2px solid var(--rosa);
-        }
-
-        /* O Conteúdo da Capa (Textos e Botão) */
         .cover-content {
-            position: relative;
-            z-index: 2; /* Na frente das portas */
-            text-align: center;
-            padding: 20px;
+            position: relative; z-index: 2; text-align: center; padding: 20px;
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
-        /* --- ANIMAÇÃO QUANDO CLICA EM ABRIR --- */
-        
-        /* 1. O texto e botão somem suavemente */
-        .cover.open .cover-content {
-            opacity: 0;
-            transform: scale(1.1);
-            pointer-events: none;
-        }
-
-        /* 2. A porta esquerda desliza para fora */
-        .cover.open::before {
-            transform: translateX(-100%);
-        }
-
-        /* 3. A porta direita desliza para fora */
-        .cover.open::after {
-            transform: translateX(100%);
-        }
-
-        /* Desativa cliques na capa após abrir */
-        .cover.open {
-            pointer-events: none;
-            transition: visibility 0s linear 2s;
-            visibility: hidden; /* Esconde a div inteira após a animação terminar */
-        }
-        /* ========================================= */
+        .cover.open .cover-content { opacity: 0; transform: scale(1.1); pointer-events: none; }
+        .cover.open::before { transform: translateX(-100%); }
+        .cover.open::after { transform: translateX(100%); }
+        .cover.open { pointer-events: none; transition: visibility 0s linear 2s; visibility: hidden; }
 
         .title-cursive {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4.5rem;
-            color: var(--rosa);
-            margin-bottom: 5px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+            font-family: 'Great Vibes', cursive; font-size: 4.5rem;
+            color: var(--rosa); margin-bottom: 5px; text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
         }
-
         .subtitle {
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--prata);
-            margin-bottom: 50px;
-            font-weight: 300;
+            font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase;
+            color: var(--prata); margin-bottom: 50px; font-weight: 300;
         }
 
-        /* Botão Interativo Principal */
         .btn-open {
             background: linear-gradient(135deg, var(--prata) 0%, #b8b8b8 100%);
-            color: var(--azul-escuro);
-            border: none;
-            padding: 15px 40px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
+            color: var(--azul-escuro); border: none; padding: 15px 40px; border-radius: 30px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2), inset 0 -3px 5px rgba(0,0,0,0.2);
-            animation: pulse 2s infinite;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            animation: pulse 2s infinite; text-transform: uppercase; letter-spacing: 2px;
         }
-
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); }
             50% { transform: scale(1.05); box-shadow: 0 5px 25px rgba(244, 172, 183, 0.5); }
             100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); }
         }
 
-        /* Tela 2: Conteúdo Interno */
+        /* ================= TELA 2: INTERIOR ================= */
         .content {
-            padding: 30px 20px;
-            text-align: center;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            overflow-y: auto;
-            opacity: 0;
-            animation: fadeInContent 1s forwards;
-            animation-delay: 1s; /* Espera a capa abrir para aparecer */
+            padding: 40px 20px 20px 20px; text-align: center; height: 100%;
+            display: flex; flex-direction: column;
+            overflow-y: auto; overflow-x: hidden; position: relative; z-index: 10;
         }
 
-        @keyframes fadeInContent {
-            to { opacity: 1; }
-        }
+        /* Garantir que todo conteúdo fique acima das partículas */
+        .content > * { position: relative; z-index: 2; }
 
+        /* Animações de Entrada (Cascata) */
+        .fade-up { opacity: 0; transform: translateY(30px); }
+        .content.show .fade-up { animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+
+        .delay-1 { animation-delay: 1.0s; } /* Foto e Nome */
+        .delay-2 { animation-delay: 1.2s; } /* Detalhes */
+        .delay-3 { animation-delay: 1.4s; } /* Contador */
+        .delay-4 { animation-delay: 1.6s; } /* Botões */
+
+        /* Elementos Decorativos */
         .foto-debutante {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--rosa);
-            box-shadow: 0 0 20px rgba(244, 172, 183, 0.4);
-            margin: 0 auto 10px auto;
-            display: block;
+            width: 130px; height: 130px; border-radius: 50%; object-fit: cover;
+            border: 3px solid var(--rosa); box-shadow: 0 0 25px rgba(244, 172, 183, 0.6);
+            margin: 0 auto 15px auto; display: block;
         }
 
-        .content h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
-            color: var(--rosa);
-            margin-top: 5px;
-        }
+        .content h1 { font-family: 'Great Vibes', cursive; font-size: 3.2rem; color: var(--rosa); }
+        
+        .ornament { color: var(--prata); font-size: 1.5rem; margin: 5px 0; font-weight: 100; letter-spacing: 5px; }
 
-        .divider {
-            width: 50px;
-            height: 2px;
-            background-color: var(--prata);
-            margin: 10px auto;
-        }
+        .details p { font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px; }
+        .highlight { color: var(--prata-brilho); font-weight: 600; font-size: 1.1rem; letter-spacing: 1px; }
 
-        .details p {
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
+        /* ================= CONTADOR REGRESSIVO ================= */
+        .countdown-wrapper {
+            margin: 25px 0; padding: 15px 10px;
+            background: rgba(255, 255, 255, 0.03); border-radius: 15px;
+            border: 1px solid rgba(244, 172, 183, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(4px);
         }
+        
+        .countdown-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; color: var(--rosa); margin-bottom: 15px; }
 
-        .highlight {
-            color: var(--prata-brilho);
-            font-weight: 600;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+        .countdown { display: flex; justify-content: center; gap: 8px; }
+        .time-box {
+            background: rgba(0, 0, 0, 0.4); border: 1px solid var(--rosa); border-radius: 8px;
+            width: 65px; padding: 10px 5px; text-align: center;
         }
+        .time-box span { display: block; font-size: 1.6rem; font-weight: 600; color: var(--prata-brilho); font-family: 'Montserrat', sans-serif; }
+        .time-box small { font-size: 0.65rem; color: var(--rosa); text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; display: block;}
 
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
+        /* Botões */
+        .buttons-container { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 10px; padding-bottom: 30px; }
         .btn {
-            background: transparent;
-            border: 1px solid var(--rosa);
-            color: var(--rosa);
-            padding: 12px 30px;
-            font-size: 0.9rem;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            width: 85%;
+            background: transparent; border: 1px solid var(--rosa); color: var(--rosa);
+            padding: 12px 30px; font-size: 0.85rem; font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase; letter-spacing: 2px; border-radius: 30px; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none; display: inline-block; width: 90%;
         }
+        .btn:hover { background: var(--rosa); color: var(--azul-escuro); box-shadow: 0 0 15px rgba(244, 172, 183, 0.5); }
+        .rsvp-text { font-size: 0.75rem; color: var(--prata); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
 
-        .btn:hover {
-            background: var(--rosa);
-            color: var(--azul-escuro);
-            box-shadow: 0 0 15px rgba(244, 172, 183, 0.5);
+        /* ================= PARTÍCULAS (MÁGICA DE FUNDO) ================= */
+        .sparkle {
+            position: absolute; background: var(--rosa); border-radius: 50%; opacity: 0;
+            box-shadow: 0 0 6px var(--rosa), 0 0 10px var(--prata); z-index: 1;
+            animation: floatUp linear infinite; pointer-events: none;
         }
-
-        .rsvp-text {
-            font-size: 0.85rem;
-            color: var(--rosa);
-            margin-bottom: 5px;
+        @keyframes floatUp {
+            0% { transform: translateY(100px) scale(0.5); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-800px) scale(1.2); opacity: 0; }
         }
 
     </style>
 </head>
 <body>
 
-    <!-- Música -->
+    <!-- Música de Fundo -->
     <audio id="musicaFundo" loop>
         <source src="sua-musica.mp3" type="audio/mpeg">
     </audio>
 
     <div class="mobile-container">
         
-        <!-- Tela Inicial (Capa com Efeito de Abertura) -->
+        <!-- Tela Inicial (Capa) -->
         <div class="cover" id="coverScreen">
             <div class="cover-content">
                 <h1 class="title-cursive">Ana Julia</h1>
                 <p class="subtitle">15 Anos</p>
                 <p style="margin-bottom: 40px; font-size: 0.9rem; color: #a8a8a8;">Você tem um convite muito especial...</p>
-                <!-- Botão simula o fecho/selo do convite -->
                 <button class="btn-open" onclick="abrirConvite()">TOCAR PARA ABRIR</button>
             </div>
         </div>
 
         <!-- Tela Principal (Convite Interno) -->
-        <div class="content">
-            <div>
-                <!-- Foto -->
+        <div class="content" id="conteudoInterno">
+            
+            <!-- Grupo 1: Foto e Nome -->
+            <div class="fade-up delay-1">
                 <img src="sua-foto.JPG" alt="Ana Julia" class="foto-debutante">
-                
                 <h1>Ana Julia</h1>
-                <div class="divider"></div>
-                <p style="font-size: 0.9rem; margin-top: 10px;">Sob as bênçãos de Deus,<br>convido você para celebrar este<br>capítulo mágico da minha vida!</p>
+                <div class="ornament">✦ ✧ ✦</div>
+                <p style="font-size: 0.85rem; margin-top: 5px; color: var(--prata);">
+                    Sob as bênçãos de Deus, convido você para<br>celebrar o capítulo mais mágico da minha vida!
+                </p>
             </div>
 
-            <div class="details">
-                <p><span class="highlight">DATA</span><br>16 de Outubro</p>
-                <p><span class="highlight">HORÁRIO</span><br>Às 20:00</p>
-                <p><span class="highlight">LOCAL</span><br>Raliflores, Cascalho</p>
+            <!-- Grupo 2: Detalhes -->
+            <div class="details fade-up delay-2" style="margin-top: 25px;">
+                <p><span class="highlight">DATA:</span> 16 de Outubro</p>
+                <p><span class="highlight">HORÁRIO:</span> Às 20:00</p>
+                <p><span class="highlight">LOCAL:</span> Raliflores, Cascalho</p>
             </div>
 
-            <div class="buttons-container">
+            <!-- Grupo 3: Contador Regressivo -->
+            <div class="countdown-wrapper fade-up delay-3">
+                <div class="countdown-title">Contagem Regressiva</div>
+                <div class="countdown">
+                    <div class="time-box"><span id="dias">00</span><small>Dias</small></div>
+                    <div class="time-box"><span id="horas">00</span><small>Horas</small></div>
+                    <div class="time-box"><span id="minutos">00</span><small>Min</small></div>
+                    <div class="time-box"><span id="segundos">00</span><small>Seg</small></div>
+                </div>
+            </div>
+
+            <!-- Grupo 4: Botões de Ação -->
+            <div class="buttons-container fade-up delay-4">
                 <p class="rsvp-text">Confirme sua presença até 20/09</p>
                 
                 <a href="https://wa.me/5519999191494?text=Olá!%20Gostaria%20de%20confirmar%20minha%20presença%20nos%2015%20anos%20da%20Ana%20Julia!" target="_blank" class="btn">
@@ -311,17 +236,77 @@
     </div>
 
     <script>
+        // Função para abrir o convite
         function abrirConvite() {
             const cover = document.getElementById('coverScreen');
             const musica = document.getElementById('musicaFundo');
+            const conteudo = document.getElementById('conteudoInterno');
             
-            // Aciona as classes de animação da capa
+            // Abre as abas
             cover.classList.add('open');
             
-            // Inicia a música
+            // Aciona as animações de entrada em cascata
+            conteudo.classList.add('show');
+            
+            // Dá play na música
             musica.play().catch(function(error) {
-                console.log("Autoplay de áudio bloqueado.", error);
+                console.log("Autoplay bloqueado.", error);
             });
+
+            // Cria as partículas de brilho (Mágica de fundo)
+            criarParticulas();
+        }
+
+        // Script do Contador Regressivo (Alvo: 16 de Outubro, 20:00)
+        // Defina o ano correto caso seja para 2024, 2025, etc. Estou configurando para o ano vigente.
+        const anoEvento = new Date().getFullYear();
+        const dataAlvo = new Date(`${anoEvento}-10-16T20:00:00`).getTime();
+
+        const intervalo = setInterval(function() {
+            const agora = new Date().getTime();
+            const distancia = dataAlvo - agora;
+
+            if (distancia < 0) {
+                clearInterval(intervalo);
+                document.getElementById('dias').innerText = "00";
+                document.getElementById('horas').innerText = "00";
+                document.getElementById('minutos').innerText = "00";
+                document.getElementById('segundos').innerText = "00";
+                document.querySelector('.countdown-title').innerText = "O grande dia chegou!";
+                return;
+            }
+
+            document.getElementById('dias').innerText = Math.floor(distancia / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('horas').innerText = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('minutos').innerText = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('segundos').innerText = Math.floor((distancia % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+        // Script para gerar as partículas de brilho flutuantes
+        function criarParticulas() {
+            const container = document.getElementById('conteudoInterno');
+            for (let i = 0; i < 25; i++) {
+                let brilho = document.createElement('div');
+                brilho.className = 'sparkle';
+                
+                // Tamanhos, posições e velocidades aleatórias para ficar natural
+                let tamanho = Math.random() * 4 + 1; // Entre 1px e 5px
+                brilho.style.width = tamanho + 'px';
+                brilho.style.height = tamanho + 'px';
+                brilho.style.left = Math.random() * 100 + '%';
+                brilho.style.bottom = '-20px';
+                
+                brilho.style.animationDelay = Math.random() * 5 + 's';
+                brilho.style.animationDuration = (Math.random() * 4 + 3) + 's'; // Entre 3 e 7 segundos subindo
+                
+                // Algumas pratas, outras rosas
+                if(Math.random() > 0.5) {
+                    brilho.style.background = 'var(--prata-brilho)';
+                    brilho.style.boxShadow = '0 0 8px var(--prata-brilho)';
+                }
+
+                container.appendChild(brilho);
+            }
         }
     </script>
 
