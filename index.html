@@ -34,7 +34,7 @@
             overflow-x: hidden;
         }
 
-        /* Container que simula a tela do celular */
+        /* Container Mobile */
         .mobile-container {
             width: 100%;
             max-width: 420px;
@@ -46,7 +46,7 @@
             box-shadow: 0 0 30px rgba(0,0,0,0.8);
         }
 
-        /* Tela 1: Capa (Envelope) */
+        /* Tela 1: Capa */
         .cover {
             position: absolute;
             top: 0;
@@ -133,7 +133,7 @@
 
         /* Tela 2: Conteúdo do Convite */
         .content {
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
             height: 100%;
             display: flex;
@@ -142,29 +142,42 @@
             overflow-y: auto;
         }
 
+        /* Estilo da Foto da Debutante */
+        .foto-debutante {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--rosa);
+            box-shadow: 0 0 20px rgba(244, 172, 183, 0.4);
+            margin: 0 auto 10px auto;
+            display: block;
+        }
+
         .content h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--rosa);
+            margin-top: 5px;
         }
 
         .divider {
             width: 50px;
             height: 2px;
             background-color: var(--prata);
-            margin: 15px auto;
+            margin: 10px auto;
         }
 
         .details p {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.5;
             margin-bottom: 15px;
         }
 
         .highlight {
             color: var(--prata-brilho);
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
 
         .buttons-container {
@@ -172,11 +185,11 @@
             flex-direction: column;
             align-items: center;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .rsvp-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--rosa);
             margin-bottom: 5px;
         }
@@ -184,6 +197,12 @@
     </style>
 </head>
 <body>
+
+    <!-- Tag de Áudio Oculta -->
+    <!-- Substitua "sua-musica.mp3" pelo link ou caminho do seu arquivo de áudio -->
+    <audio id="musicaFundo" loop>
+        <source src="sua-musica.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="mobile-container">
         
@@ -198,7 +217,11 @@
         <!-- Tela Principal (Convite Aberto) -->
         <div class="content">
             <div>
-                <h1 style="font-size: 3rem;">Ana Julia</h1>
+                <!-- Foto da Debutante -->
+                <!-- Substitua "sua-foto.jpg" pelo caminho da foto da Ana Julia -->
+                <img src="sua-foto.jpg" alt="Ana Julia" class="foto-debutante">
+                
+                <h1>Ana Julia</h1>
                 <div class="divider"></div>
                 <p style="font-size: 0.9rem; margin-top: 10px;">Sob as bênçãos de Deus,<br>convido você para celebrar este<br>capítulo mágico da minha vida!</p>
             </div>
@@ -212,12 +235,10 @@
             <div class="buttons-container">
                 <p class="rsvp-text">Confirme sua presença até 20/09</p>
                 
-                <!-- Link direto para o WhatsApp já configurado com a mensagem -->
                 <a href="https://wa.me/5519999191494?text=Olá!%20Gostaria%20de%20confirmar%20minha%20presença%20nos%2015%20anos%20da%20Ana%20Julia!" target="_blank" class="btn">
                     Confirmar Presença
                 </a>
                 
-                <!-- Link genérico do Google Maps (basta você alterar a URL depois se quiser a localização exata no mapa) -->
                 <a href="https://maps.google.com/?q=Raliflores,+Cascalho,+Cordeirópolis" target="_blank" class="btn" style="border-color: var(--prata); color: var(--prata);">
                     Localização (Maps)
                 </a>
@@ -227,10 +248,18 @@
     </div>
 
     <script>
-        // Função para acionar a animação de abertura
+        // Função para acionar a animação e dar play na música
         function abrirConvite() {
             const cover = document.getElementById('coverScreen');
+            const musica = document.getElementById('musicaFundo');
+            
+            // Inicia a animação de subir a capa
             cover.classList.add('open');
+            
+            // Dá play na música (o .catch previne erros no console caso algum navegador bloqueie)
+            musica.play().catch(function(error) {
+                console.log("Autoplay de áudio bloqueado pelas políticas do navegador.", error);
+            });
         }
     </script>
 
