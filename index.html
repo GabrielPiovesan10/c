@@ -38,18 +38,19 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             background-color: #000;
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            align-items: flex-start; /* O segredo: cola o convite no topo da tela */
+            height: 100dvh; /* Mantém a proporção exata da tela visível */
+            margin: 0; /* Remove margens fantasmas do navegador */
             color: var(--prata);
             overflow: hidden; 
         }
 
+        
         .mobile-container {
             width: 100%;
             max-width: 420px;
