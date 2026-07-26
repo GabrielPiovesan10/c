@@ -48,7 +48,6 @@
             z-index: 30; pointer-events: auto;
         }
 
-        /* Portas que abrem (a linha prata está aqui) */
         .cover::before, .cover::after {
             content: ''; position: absolute; top: 0; width: 50%; height: 100%;
             background: linear-gradient(135deg, var(--azul-escuro) 0%, #070c1d 100%);
@@ -59,7 +58,6 @@
         .cover::before { left: 0; border-right: 2px solid var(--prata-brilho); } 
         .cover::after { right: 0; border-left: 2px solid var(--prata-brilho); }
 
-        /* Fundo Radial Escuro no Texto para esconder a linha que passava no meio */
         .cover-content {
             position: relative; 
             z-index: 2; 
@@ -86,7 +84,6 @@
             color: var(--rosa); margin-bottom: 50px; font-weight: 300;
         }
         
-        /* O número animado ganha destaque */
         #contador-idade {
             font-weight: 700;
             color: var(--prata-brilho);
@@ -115,7 +112,6 @@
             background-position: center; 
             z-index: 1;
         }
-        /* Película protetora escura */
         .bg-debutante::after {
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -137,7 +133,6 @@
             text-align: center;
         }
 
-        /* Animações em cascata */
         .fade-up { opacity: 0; transform: translateY(30px); }
         .inner-content.show .fade-up { animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         
@@ -148,7 +143,6 @@
         .delay-4 { animation-delay: 1.6s; } 
         .delay-5 { animation-delay: 1.8s; }
 
-        /* Textos Iniciais */
         .header-text { margin-top: 100px; } 
         .header-text h1 { 
             font-family: 'Great Vibes', cursive; font-size: 4rem; 
@@ -158,7 +152,6 @@
         
         .ornament { color: var(--rosa); font-size: 1.5rem; margin: 5px 0; font-weight: 100; letter-spacing: 5px; }
 
-        /* Nova caixa com o texto de emoção */
         .texto-emocao {
             margin-top: 25px;
             padding: 20px;
@@ -178,13 +171,11 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,1);
         }
 
-        /* Detalhes de Data/Local */
         .details { margin-top: 30px; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; border: 1px solid rgba(224, 224, 224, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(4px); }
         .details p { font-size: 1rem; line-height: 1.6; margin-bottom: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
         .details p:last-child { margin-bottom: 0; }
         .highlight { color: var(--rosa); font-weight: 600; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* ================= CONTADOR REGRESSIVO ================= */
         .countdown-wrapper {
             margin: 30px 0; padding: 20px 10px;
             background: rgba(255, 255, 255, 0.08); border-radius: 15px;
@@ -203,14 +194,15 @@
         .time-box span { display: block; font-size: 1.8rem; font-weight: 600; color: var(--prata-brilho); font-family: 'Montserrat', sans-serif; }
         .time-box small { font-size: 0.7rem; color: var(--rosa); text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; display: block;}
 
-        /* ================= BOTÕES ================= */
         .buttons-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px; }
+        
+        /* O botão agora aciona o Modal em vez de ir direto pro WhatsApp */
         .btn {
             background: rgba(0, 0, 0, 0.6); border: 1px solid var(--prata); color: var(--prata-brilho);
             padding: 15px 30px; font-size: 0.9rem; font-family: 'Montserrat', sans-serif;
             text-transform: uppercase; letter-spacing: 2px; border-radius: 30px; cursor: pointer;
             transition: all 0.3s ease; text-decoration: none; display: inline-block; width: 90%;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px); text-align: center;
         }
         .btn:hover { background: var(--rosa); color: var(--azul-escuro); border-color: var(--rosa); box-shadow: 0 0 15px rgba(244, 172, 183, 0.5); }
         .rsvp-text { font-size: 0.8rem; color: var(--prata-brilho); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);}
@@ -228,6 +220,98 @@
             100% { transform: translateY(-800px) scale(1.2); opacity: 0; }
         }
 
+        /* ================= MODAL DE CONFIRMAÇÃO ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 50;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1; pointer-events: auto;
+        }
+
+        .modal-box {
+            background: rgba(10, 17, 40, 0.9);
+            border: 1px solid var(--prata);
+            border-radius: 20px;
+            padding: 30px 20px;
+            width: 90%; max-width: 350px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(244, 172, 183, 0.1);
+            transform: translateY(50px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--rosa);
+            margin-bottom: 10px;
+        }
+        
+        .modal-desc {
+            font-size: 0.9rem;
+            color: var(--prata-brilho);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--prata-metal);
+            border-radius: 10px;
+            color: var(--prata-brilho);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 25px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .modal-input::placeholder { color: rgba(224, 224, 224, 0.5); }
+        .modal-input:focus { border-color: var(--rosa); box-shadow: 0 0 10px rgba(244, 172, 183, 0.3); }
+
+        .modal-buttons {
+            display: flex; gap: 10px; justify-content: center;
+        }
+        
+        .btn-modal {
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            flex: 1;
+            transition: all 0.3s ease;
+            border: 1px solid var(--prata);
+        }
+        
+        .btn-cancelar {
+            background: transparent;
+            color: var(--prata-brilho);
+        }
+        .btn-cancelar:hover { background: rgba(255, 255, 255, 0.1); }
+        
+        .btn-enviar {
+            background: linear-gradient(135deg, var(--prata-brilho) 0%, var(--prata-metal) 100%);
+            color: var(--azul-escuro);
+            border: none;
+        }
+        .btn-enviar:hover { background: var(--rosa); box-shadow: 0 0 15px rgba(244, 172, 183, 0.5); }
+
     </style>
 </head>
 <body>
@@ -242,7 +326,6 @@
         <div class="cover" id="coverScreen">
             <div class="cover-content">
                 <h1 class="title-cursive">Ana Julia</h1>
-                <!-- Aqui entra o contador animado de idade -->
                 <p class="subtitle"><span id="contador-idade">1</span> Anos</p>
                 <p style="margin-bottom: 40px; font-size: 0.9rem; color: var(--prata-metal);">Você tem um convite muito especial...</p>
                 <button class="btn-open" onclick="abrirConvite()">TOCAR PARA ABRIR</button>
@@ -259,19 +342,16 @@
                     <div class="ornament">✦ ✧ ✦</div>
                 </div>
 
-                <!-- Novo: Texto emocionante sobre os 15 anos -->
                 <div class="texto-emocao fade-up delay-2">
                     <p>"Completar 15 anos é o início de uma nova e linda fase, um momento mágico onde os sonhos começam a ganhar asas. Ter pessoas tão especiais como vocês ao meu lado para compartilhar esse dia torna tudo ainda mais inesquecível e perfeito."</p>
                 </div>
 
-                <!-- Detalhes empurrados para o delay-3 -->
                 <div class="details fade-up delay-3">
                     <p><span class="highlight">DATA</span><br>16 de Outubro</p>
                     <p><span class="highlight">HORÁRIO</span><br>Às 20:00</p>
                     <p><span class="highlight">LOCAL</span><br>Raliflores, Cascalho</p>
                 </div>
 
-                <!-- Contador Regressivo empurrado para o delay-4 -->
                 <div class="countdown-wrapper fade-up delay-4">
                     <div class="countdown-title">Contagem Regressiva</div>
                     <div class="countdown">
@@ -282,15 +362,31 @@
                     </div>
                 </div>
 
-                <!-- Botões empurrados para o delay-5 -->
+                <!-- Botões -->
                 <div class="buttons-container fade-up delay-5">
                     <p class="rsvp-text">Confirme sua presença até 20/09</p>
-                    <a href="https://wa.me/5519999191494?text=Olá!%20Gostaria%20de%20confirmar%20minha%20presença%20nos%2015%20anos%20da%20Ana%20Julia!" target="_blank" class="btn">
-                        Confirmar Presença
-                    </a>
+                    
+                    <!-- Mudamos o link para um onClick que abre o Modal -->
+                    <button class="btn" onclick="abrirModal()">Confirmar Presença</button>
+                    
                     <a href="https://maps.google.com/?q=Raliflores,+Cascalho,+Cordeirópolis" target="_blank" class="btn">
                         Localização (Maps)
                     </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ================= MODAL DE CONFIRMAÇÃO ================= -->
+        <div class="modal-overlay" id="modalPresenca">
+            <div class="modal-box">
+                <h2 class="modal-title">Sua Presença</h2>
+                <p class="modal-desc">Por favor, digite seu nome e sobrenome para confirmarmos sua presença.</p>
+                
+                <input type="text" id="nomeConvidado" class="modal-input" placeholder="Ex: João Silva" autocomplete="off">
+                
+                <div class="modal-buttons">
+                    <button class="btn-modal btn-cancelar" onclick="fecharModal()">Cancelar</button>
+                    <button class="btn-modal btn-enviar" onclick="enviarWhatsApp()">Enviar</button>
                 </div>
             </div>
         </div>
@@ -306,20 +402,16 @@
             let idade = 1;
             elemento.innerText = idade;
             
-            // Vai somando os números a cada 100 milissegundos
             const intervaloIdade = setInterval(() => {
                 idade++;
                 elemento.innerText = idade;
                 
                 if (idade >= 15) {
                     clearInterval(intervaloIdade);
-                    // Chegou no 15, espera 3 segundos (3000ms) e começa de novo
                     setTimeout(animar15Anos, 3000); 
                 }
             }, 100); 
         }
-        
-        // Inicia a animação assim que a página carrega
         animar15Anos();
 
 
@@ -338,6 +430,47 @@
 
             criarParticulas();
         }
+        
+        // ======= FUNÇÕES DO MODAL (NOVO) =======
+        function abrirModal() {
+            document.getElementById('modalPresenca').classList.add('active');
+            // Dá um foco suave no input para facilitar
+            setTimeout(() => {
+                document.getElementById('nomeConvidado').focus();
+            }, 400);
+        }
+        
+        function fecharModal() {
+            document.getElementById('modalPresenca').classList.remove('active');
+            // Limpa o campo caso a pessoa tenha desistido
+            document.getElementById('nomeConvidado').value = "";
+        }
+        
+        function enviarWhatsApp() {
+            const nomeInput = document.getElementById('nomeConvidado').value.trim();
+            
+            if (nomeInput === "") {
+                alert("Por favor, digite seu nome antes de confirmar.");
+                return;
+            }
+            
+            // O número fornecido no início
+            const numeroTelefone = "5519999191494"; 
+            
+            // A mensagem montada com o nome da pessoa
+            const mensagem = `Olá! Eu, *${nomeInput}*, gostaria de confirmar minha presença nos 15 anos da Ana Julia!`;
+            
+            // Codifica a mensagem para o formato de URL do WhatsApp
+            const textoCodificado = encodeURIComponent(mensagem);
+            
+            // Monta o link final
+            const linkWhatsApp = `https://wa.me/${numeroTelefone}?text=${textoCodificado}`;
+            
+            // Fecha o modal e abre o WhatsApp numa nova aba
+            fecharModal();
+            window.open(linkWhatsApp, '_blank');
+        }
+
 
         // ======= CONTAGEM REGRESSIVA =======
         const dataAlvo = new Date(`2026-10-16T20:00:00`).getTime();
