@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Convite 15 Anos - Ana Julia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -27,7 +27,7 @@
             align-items: center;
             min-height: 100vh;
             color: var(--prata);
-            overflow: hidden; /* Trava o fundo da página web */
+            overflow: hidden; 
         }
 
         .mobile-container {
@@ -48,6 +48,7 @@
             z-index: 30; pointer-events: auto;
         }
 
+        /* Portas que abrem (a linha prata está aqui) */
         .cover::before, .cover::after {
             content: ''; position: absolute; top: 0; width: 50%; height: 100%;
             background: linear-gradient(135deg, var(--azul-escuro) 0%, #070c1d 100%);
@@ -55,11 +56,17 @@
             transition: transform 1.2s cubic-bezier(0.64, 0.05, 0.08, 1) 0.4s;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
         }
-        .cover::before { left: 0; border-right: 2px solid var(--prata); } 
-        .cover::after { right: 0; border-left: 2px solid var(--prata); }
+        .cover::before { left: 0; border-right: 2px solid var(--prata-brilho); } 
+        .cover::after { right: 0; border-left: 2px solid var(--prata-brilho); }
 
+        /* Fundo Radial Escuro no Texto para esconder a linha que passava no meio */
         .cover-content {
-            position: relative; z-index: 2; text-align: center; padding: 20px;
+            position: relative; 
+            z-index: 2; 
+            text-align: center; 
+            padding: 50px 20px;
+            width: 100%;
+            background: radial-gradient(circle, rgba(7, 12, 29, 1) 25%, transparent 70%);
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
@@ -73,9 +80,17 @@
             color: var(--prata-brilho); 
             margin-bottom: 5px; text-shadow: 0 0 15px rgba(244, 172, 183, 0.5); 
         }
+        
         .subtitle {
-            font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase;
+            font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase;
             color: var(--rosa); margin-bottom: 50px; font-weight: 300;
+        }
+        
+        /* O número animado ganha destaque */
+        #contador-idade {
+            font-weight: 700;
+            color: var(--prata-brilho);
+            font-size: 1.5rem;
         }
 
         .btn-open {
@@ -93,14 +108,14 @@
 
         /* ================= TELA 2: FOTO DE FUNDO ================= */
         .bg-debutante {
-            position: absolute; /* Fixa no fundo do celular */
+            position: absolute; 
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('sua-foto.JPG');
             background-size: cover;
-            background-position: center; /* Centraliza a foto perfeitamente */
+            background-position: center; 
             z-index: 1;
         }
-        /* Película protetora escura para dar leitura aos textos sem apagar a foto */
+        /* Película protetora escura */
         .bg-debutante::after {
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -110,9 +125,9 @@
         /* ================= TELA 2: TEXTOS QUE ROLAM ================= */
         .content {
             position: relative; 
-            z-index: 10; /* Fica acima da foto */
+            z-index: 10; 
             height: 100%;
-            overflow-y: auto; /* Permite deslizar os textos */
+            overflow-y: auto; 
             -webkit-overflow-scrolling: touch;
             padding-bottom: 50px; 
         }
@@ -122,7 +137,7 @@
             text-align: center;
         }
 
-        /* Animações de Entrada (Cascata) */
+        /* Animações em cascata */
         .fade-up { opacity: 0; transform: translateY(30px); }
         .inner-content.show .fade-up { animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         
@@ -131,28 +146,43 @@
         .delay-2 { animation-delay: 1.2s; } 
         .delay-3 { animation-delay: 1.4s; } 
         .delay-4 { animation-delay: 1.6s; } 
+        .delay-5 { animation-delay: 1.8s; }
 
-        /* Textos */
-        .header-text { margin-top: 100px; } /* Empurra o nome um pouco pra baixo pra focar no rosto dela */
+        /* Textos Iniciais */
+        .header-text { margin-top: 100px; } 
         .header-text h1 { 
             font-family: 'Great Vibes', cursive; font-size: 4rem; 
             color: var(--prata-brilho); 
             text-shadow: 2px 2px 10px rgba(0,0,0,0.9); 
         }
         
-        .ornament { color: var(--rosa); font-size: 1.5rem; margin: 10px 0; font-weight: 100; letter-spacing: 5px; }
+        .ornament { color: var(--rosa); font-size: 1.5rem; margin: 5px 0; font-weight: 100; letter-spacing: 5px; }
 
-        .header-text p { 
-            font-size: 0.95rem; margin-top: 5px; color: var(--prata); 
-            text-shadow: 1px 1px 4px rgba(0,0,0,1); /* Sombra preta pra ler bem sobre a foto */
-            font-weight: 600;
+        /* Nova caixa com o texto de emoção */
+        .texto-emocao {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 3px solid var(--rosa);
+            border-right: 3px solid var(--rosa);
+            border-radius: 10px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        
+        .texto-emocao p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--prata-brilho);
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0,0,0,1);
         }
 
-        /* Detalhes */
-        .details { margin-top: 40px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(2px); }
+        /* Detalhes de Data/Local */
+        .details { margin-top: 30px; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; border: 1px solid rgba(224, 224, 224, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(4px); }
         .details p { font-size: 1rem; line-height: 1.6; margin-bottom: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
         .details p:last-child { margin-bottom: 0; }
-        .highlight { color: var(--rosa); font-weight: 600; font-size: 1.2rem; letter-spacing: 1px; }
+        .highlight { color: var(--rosa); font-weight: 600; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; }
 
         /* ================= CONTADOR REGRESSIVO ================= */
         .countdown-wrapper {
@@ -160,7 +190,7 @@
             background: rgba(255, 255, 255, 0.08); border-radius: 15px;
             border: 1px solid var(--prata-metal); 
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px); /* Efeito de vidro bem forte */
+            backdrop-filter: blur(8px); 
         }
         
         .countdown-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--prata-brilho); margin-bottom: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
@@ -185,7 +215,7 @@
         .btn:hover { background: var(--rosa); color: var(--azul-escuro); border-color: var(--rosa); box-shadow: 0 0 15px rgba(244, 172, 183, 0.5); }
         .rsvp-text { font-size: 0.8rem; color: var(--prata-brilho); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);}
 
-        /* ================= PARTÍCULAS (MÁGICA DE FUNDO) ================= */
+        /* ================= PARTÍCULAS ================= */
         .sparkle {
             position: absolute; border-radius: 50%; opacity: 0;
             z-index: 5; 
@@ -212,35 +242,37 @@
         <div class="cover" id="coverScreen">
             <div class="cover-content">
                 <h1 class="title-cursive">Ana Julia</h1>
-                <p class="subtitle">15 Anos</p>
+                <!-- Aqui entra o contador animado de idade -->
+                <p class="subtitle"><span id="contador-idade">1</span> Anos</p>
                 <p style="margin-bottom: 40px; font-size: 0.9rem; color: var(--prata-metal);">Você tem um convite muito especial...</p>
                 <button class="btn-open" onclick="abrirConvite()">TOCAR PARA ABRIR</button>
             </div>
         </div>
 
-        <!-- FOTO INTEIRA FIXA NO FUNDO -->
         <div class="bg-debutante"></div>
         
-        <!-- TEXTOS QUE DESLIZAM POR CIMA DA FOTO -->
         <div class="content" id="scrollArea">
             <div class="inner-content" id="conteudoInterno">
                 
-                <!-- O margin-top no CSS empurra o texto pra baixo pra não tapar o rosto -->
                 <div class="header-text fade-up delay-1">
                     <h1>Ana Julia</h1>
                     <div class="ornament">✦ ✧ ✦</div>
-                    <p>Sob as bênçãos de Deus, convido você para<br>celebrar o capítulo mais mágico da minha vida!</p>
                 </div>
 
-                <!-- Adicionei uma caixinha de vidro escuro aqui pra garantir que a data não suma na foto -->
-                <div class="details fade-up delay-2">
+                <!-- Novo: Texto emocionante sobre os 15 anos -->
+                <div class="texto-emocao fade-up delay-2">
+                    <p>"Completar 15 anos é o início de uma nova e linda fase, um momento mágico onde os sonhos começam a ganhar asas. Ter pessoas tão especiais como vocês ao meu lado para compartilhar esse dia torna tudo ainda mais inesquecível e perfeito."</p>
+                </div>
+
+                <!-- Detalhes empurrados para o delay-3 -->
+                <div class="details fade-up delay-3">
                     <p><span class="highlight">DATA</span><br>16 de Outubro</p>
                     <p><span class="highlight">HORÁRIO</span><br>Às 20:00</p>
                     <p><span class="highlight">LOCAL</span><br>Raliflores, Cascalho</p>
                 </div>
 
-                <!-- Contador Regressivo (Efeito de vidro sobre a foto) -->
-                <div class="countdown-wrapper fade-up delay-3">
+                <!-- Contador Regressivo empurrado para o delay-4 -->
+                <div class="countdown-wrapper fade-up delay-4">
                     <div class="countdown-title">Contagem Regressiva</div>
                     <div class="countdown">
                         <div class="time-box"><span id="dias">00</span><small>Dias</small></div>
@@ -250,14 +282,12 @@
                     </div>
                 </div>
 
-                <!-- Botões -->
-                <div class="buttons-container fade-up delay-4">
+                <!-- Botões empurrados para o delay-5 -->
+                <div class="buttons-container fade-up delay-5">
                     <p class="rsvp-text">Confirme sua presença até 20/09</p>
-                    
                     <a href="https://wa.me/5519999191494?text=Olá!%20Gostaria%20de%20confirmar%20minha%20presença%20nos%2015%20anos%20da%20Ana%20Julia!" target="_blank" class="btn">
                         Confirmar Presença
                     </a>
-                    
                     <a href="https://maps.google.com/?q=Raliflores,+Cascalho,+Cordeirópolis" target="_blank" class="btn">
                         Localização (Maps)
                     </a>
@@ -268,6 +298,32 @@
     </div>
 
     <script>
+        // ======= ANIMAÇÃO DO NÚMERO 15 NA CAPA =======
+        function animar15Anos() {
+            const elemento = document.getElementById('contador-idade');
+            if (!elemento) return;
+            
+            let idade = 1;
+            elemento.innerText = idade;
+            
+            // Vai somando os números a cada 100 milissegundos
+            const intervaloIdade = setInterval(() => {
+                idade++;
+                elemento.innerText = idade;
+                
+                if (idade >= 15) {
+                    clearInterval(intervaloIdade);
+                    // Chegou no 15, espera 3 segundos (3000ms) e começa de novo
+                    setTimeout(animar15Anos, 3000); 
+                }
+            }, 100); 
+        }
+        
+        // Inicia a animação assim que a página carrega
+        animar15Anos();
+
+
+        // ======= ABRIR CONVITE =======
         function abrirConvite() {
             const cover = document.getElementById('coverScreen');
             const musica = document.getElementById('musicaFundo');
@@ -283,7 +339,7 @@
             criarParticulas();
         }
 
-        // Contador programado para 16 de Outubro de 2026 às 20:00
+        // ======= CONTAGEM REGRESSIVA =======
         const dataAlvo = new Date(`2026-10-16T20:00:00`).getTime();
 
         const intervalo = setInterval(function() {
@@ -306,6 +362,7 @@
             document.getElementById('segundos').innerText = Math.floor((distancia % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
+        // ======= PARTÍCULAS =======
         function criarParticulas() {
             const container = document.getElementById('scrollArea');
             for (let i = 0; i < 25; i++) {
