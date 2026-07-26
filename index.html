@@ -27,13 +27,12 @@
             align-items: center;
             min-height: 100vh;
             color: var(--prata);
-            overflow: hidden; /* Trava o fundo preto */
+            overflow: hidden; /* Trava o fundo da página web */
         }
 
         .mobile-container {
             width: 100%;
             max-width: 420px;
-            /* Usando dvh para garantir o tamanho exato da tela do celular sem bugar a rolagem */
             height: 100dvh; 
             background-color: var(--azul-fundo);
             position: relative;
@@ -56,7 +55,7 @@
             transition: transform 1.2s cubic-bezier(0.64, 0.05, 0.08, 1) 0.4s;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
         }
-        .cover::before { left: 0; border-right: 2px solid var(--prata); } /* Borda prata na abertura */
+        .cover::before { left: 0; border-right: 2px solid var(--prata); } 
         .cover::after { right: 0; border-left: 2px solid var(--prata); }
 
         .cover-content {
@@ -71,8 +70,8 @@
 
         .title-cursive {
             font-family: 'Great Vibes', cursive; font-size: 4.5rem;
-            color: var(--prata-brilho); /* Título Prata na capa */
-            margin-bottom: 5px; text-shadow: 0 0 15px rgba(244, 172, 183, 0.5); /* Brilho rosa */
+            color: var(--prata-brilho); 
+            margin-bottom: 5px; text-shadow: 0 0 15px rgba(244, 172, 183, 0.5); 
         }
         .subtitle {
             font-size: 1.2rem; letter-spacing: 4px; text-transform: uppercase;
@@ -92,43 +91,34 @@
             100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); }
         }
 
-        /* ================= TELA 2: INTERIOR ================= */
-        .content {
-            height: 100%;
-            overflow-y: auto; /* Permite rolagem normal */
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch; /* Rolagem suave no iPhone */
-            position: relative; 
-            z-index: 10;
-            padding-bottom: 60px; /* Espaço extra no final */
-        }
-
-        /* Imagem de Fundo com Degradê (O Efeito que não atrapalha leitura) */
+        /* ================= TELA 2: FOTO DE FUNDO ================= */
         .bg-debutante {
-            position: absolute;
-            top: 0; left: 0; width: 100%;
-            height: 60%; /* Vai até a metade da tela */
+            position: absolute; /* Fixa no fundo do celular */
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('sua-foto.JPG');
             background-size: cover;
-            background-position: center top;
+            background-position: center; /* Centraliza a foto perfeitamente */
             z-index: 1;
         }
-        /* Máscara de Escurecimento por cima da foto */
+        /* Película protetora escura para dar leitura aos textos sem apagar a foto */
         .bg-debutante::after {
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(
-                to bottom, 
-                rgba(7, 12, 29, 0.2) 0%,    /* Topo mais claro */
-                rgba(7, 12, 29, 0.8) 60%,    /* Começa a escurecer para ler o texto */
-                var(--azul-fundo) 100%       /* Fica totalmente azul no final da imagem */
-            );
+            background: linear-gradient(to bottom, rgba(7, 12, 29, 0.2) 0%, rgba(7, 12, 29, 0.8) 100%);
         }
 
-        /* Container de tudo que fica por cima da imagem e do fundo */
+        /* ================= TELA 2: TEXTOS QUE ROLAM ================= */
+        .content {
+            position: relative; 
+            z-index: 10; /* Fica acima da foto */
+            height: 100%;
+            overflow-y: auto; /* Permite deslizar os textos */
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 50px; 
+        }
+
         .inner-content {
-            position: relative; z-index: 15;
-            padding: 40px 20px 20px 20px;
+            padding: 40px 20px;
             text-align: center;
         }
 
@@ -137,45 +127,47 @@
         .inner-content.show .fade-up { animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         
         @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-        .delay-1 { animation-delay: 1.0s; } /* Nome */
-        .delay-2 { animation-delay: 1.2s; } /* Detalhes */
-        .delay-3 { animation-delay: 1.4s; } /* Contador */
-        .delay-4 { animation-delay: 1.6s; } /* Botões */
+        .delay-1 { animation-delay: 1.0s; } 
+        .delay-2 { animation-delay: 1.2s; } 
+        .delay-3 { animation-delay: 1.4s; } 
+        .delay-4 { animation-delay: 1.6s; } 
 
-        /* Textos Iniciais */
-        .header-text { margin-top: 150px; } /* Empurra o nome mais para baixo para ver o rosto na foto */
+        /* Textos */
+        .header-text { margin-top: 100px; } /* Empurra o nome um pouco pra baixo pra focar no rosto dela */
         .header-text h1 { 
             font-family: 'Great Vibes', cursive; font-size: 4rem; 
             color: var(--prata-brilho); 
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8); 
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.9); 
         }
         
         .ornament { color: var(--rosa); font-size: 1.5rem; margin: 10px 0; font-weight: 100; letter-spacing: 5px; }
 
         .header-text p { 
             font-size: 0.95rem; margin-top: 5px; color: var(--prata); 
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.9); /* Sombra para garantir leitura em cima da foto */
+            text-shadow: 1px 1px 4px rgba(0,0,0,1); /* Sombra preta pra ler bem sobre a foto */
+            font-weight: 600;
         }
 
         /* Detalhes */
-        .details { margin-top: 40px; }
-        .details p { font-size: 1rem; line-height: 1.6; margin-bottom: 15px; }
+        .details { margin-top: 40px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(2px); }
+        .details p { font-size: 1rem; line-height: 1.6; margin-bottom: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+        .details p:last-child { margin-bottom: 0; }
         .highlight { color: var(--rosa); font-weight: 600; font-size: 1.2rem; letter-spacing: 1px; }
 
         /* ================= CONTADOR REGRESSIVO ================= */
         .countdown-wrapper {
             margin: 30px 0; padding: 20px 10px;
-            background: rgba(255, 255, 255, 0.05); border-radius: 15px;
-            border: 1px solid var(--prata-metal); /* Borda prata */
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.08); border-radius: 15px;
+            border: 1px solid var(--prata-metal); 
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px); /* Efeito de vidro bem forte */
         }
         
-        .countdown-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--prata-brilho); margin-bottom: 15px; }
+        .countdown-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--prata-brilho); margin-bottom: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
 
         .countdown { display: flex; justify-content: center; gap: 10px; }
         .time-box {
-            background: rgba(0, 0, 0, 0.5); border: 1px solid var(--rosa); border-radius: 8px;
+            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--rosa); border-radius: 8px;
             width: 70px; padding: 12px 5px; text-align: center;
         }
         .time-box span { display: block; font-size: 1.8rem; font-weight: 600; color: var(--prata-brilho); font-family: 'Montserrat', sans-serif; }
@@ -184,19 +176,19 @@
         /* ================= BOTÕES ================= */
         .buttons-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px; }
         .btn {
-            background: transparent; border: 1px solid var(--prata); color: var(--prata-brilho);
+            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--prata); color: var(--prata-brilho);
             padding: 15px 30px; font-size: 0.9rem; font-family: 'Montserrat', sans-serif;
             text-transform: uppercase; letter-spacing: 2px; border-radius: 30px; cursor: pointer;
             transition: all 0.3s ease; text-decoration: none; display: inline-block; width: 90%;
-            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
         }
         .btn:hover { background: var(--rosa); color: var(--azul-escuro); border-color: var(--rosa); box-shadow: 0 0 15px rgba(244, 172, 183, 0.5); }
-        .rsvp-text { font-size: 0.8rem; color: var(--rosa); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; font-weight: 600;}
+        .rsvp-text { font-size: 0.8rem; color: var(--prata-brilho); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);}
 
         /* ================= PARTÍCULAS (MÁGICA DE FUNDO) ================= */
         .sparkle {
             position: absolute; border-radius: 50%; opacity: 0;
-            z-index: 5; /* Fica acima do fundo, atrás do texto */
+            z-index: 5; 
             animation: floatUp linear infinite; pointer-events: none;
         }
         @keyframes floatUp {
@@ -216,7 +208,7 @@
 
     <div class="mobile-container">
         
-        <!-- Capa -->
+        <!-- Capa do Convite -->
         <div class="cover" id="coverScreen">
             <div class="cover-content">
                 <h1 class="title-cursive">Ana Julia</h1>
@@ -226,30 +218,28 @@
             </div>
         </div>
 
-        <!-- Conteúdo Rolável -->
+        <!-- FOTO INTEIRA FIXA NO FUNDO -->
+        <div class="bg-debutante"></div>
+        
+        <!-- TEXTOS QUE DESLIZAM POR CIMA DA FOTO -->
         <div class="content" id="scrollArea">
-            
-            <!-- Imagem de Fundo que some no degradê -->
-            <!-- TROQUE AQUI o nome se precisar (sua-foto.JPG) -->
-            <div class="bg-debutante" id="fundoFoto"></div>
-            
             <div class="inner-content" id="conteudoInterno">
                 
-                <!-- Nome por cima da foto (mas com espaço) -->
+                <!-- O margin-top no CSS empurra o texto pra baixo pra não tapar o rosto -->
                 <div class="header-text fade-up delay-1">
                     <h1>Ana Julia</h1>
                     <div class="ornament">✦ ✧ ✦</div>
                     <p>Sob as bênçãos de Deus, convido você para<br>celebrar o capítulo mais mágico da minha vida!</p>
                 </div>
 
-                <!-- Detalhes onde o fundo já virou azul escuro sólido -->
+                <!-- Adicionei uma caixinha de vidro escuro aqui pra garantir que a data não suma na foto -->
                 <div class="details fade-up delay-2">
                     <p><span class="highlight">DATA</span><br>16 de Outubro</p>
                     <p><span class="highlight">HORÁRIO</span><br>Às 20:00</p>
                     <p><span class="highlight">LOCAL</span><br>Raliflores, Cascalho</p>
                 </div>
 
-                <!-- Contador Regressivo prateado -->
+                <!-- Contador Regressivo (Efeito de vidro sobre a foto) -->
                 <div class="countdown-wrapper fade-up delay-3">
                     <div class="countdown-title">Contagem Regressiva</div>
                     <div class="countdown">
@@ -260,7 +250,7 @@
                     </div>
                 </div>
 
-                <!-- Botões Prateados -->
+                <!-- Botões -->
                 <div class="buttons-container fade-up delay-4">
                     <p class="rsvp-text">Confirme sua presença até 20/09</p>
                     
@@ -283,22 +273,17 @@
             const musica = document.getElementById('musicaFundo');
             const conteudo = document.getElementById('conteudoInterno');
             
-            // Abre a capa
             cover.classList.add('open');
-            
-            // Inicia as animações do texto e botões subindo
             conteudo.classList.add('show');
             
-            // Dá play na música
             musica.play().catch(function(error) {
                 console.log("Autoplay bloqueado.", error);
             });
 
-            // Cria as partículas subindo na tela
             criarParticulas();
         }
 
-        // Script do Contador Regressivo para 16 de Outubro de 2026 às 20:00
+        // Contador programado para 16 de Outubro de 2026 às 20:00
         const dataAlvo = new Date(`2026-10-16T20:00:00`).getTime();
 
         const intervalo = setInterval(function() {
@@ -321,7 +306,6 @@
             document.getElementById('segundos').innerText = Math.floor((distancia % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // Script para gerar as partículas de brilho pratas e rosas
         function criarParticulas() {
             const container = document.getElementById('scrollArea');
             for (let i = 0; i < 25; i++) {
@@ -337,7 +321,6 @@
                 brilho.style.animationDelay = Math.random() * 5 + 's';
                 brilho.style.animationDuration = (Math.random() * 4 + 4) + 's'; 
                 
-                // Mescla as cores: algumas Prata, outras Rosa
                 if(Math.random() > 0.5) {
                     brilho.style.background = 'var(--prata-brilho)';
                     brilho.style.boxShadow = '0 0 10px var(--prata-brilho)';
@@ -346,7 +329,6 @@
                     brilho.style.boxShadow = '0 0 10px var(--rosa)';
                 }
 
-                // Insere dentro do container de rolagem
                 container.appendChild(brilho);
             }
         }
