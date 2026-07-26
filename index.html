@@ -46,7 +46,9 @@
             box-shadow: 0 0 30px rgba(0,0,0,0.8);
         }
 
-        /* Tela 1: Capa */
+        /* =========================================
+           TELA 1: CAPA (Efeito de Abertura Real)
+           ========================================= */
         .cover {
             position: absolute;
             top: 0;
@@ -57,63 +59,91 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, var(--azul-escuro) 0%, #121c3b 100%);
             z-index: 10;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), opacity 1s ease;
-            padding: 20px;
-            text-align: center;
-            border: 2px solid var(--prata);
+            pointer-events: auto;
         }
 
-        .cover.open {
-            transform: translateY(-100%);
+        /* As duas metades do convite (Portas/Abas) */
+        .cover::before, .cover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--azul-escuro) 0%, #121c3b 100%);
+            z-index: 1; /* Atrás dos textos da capa */
+            transition: transform 1.2s cubic-bezier(0.64, 0.05, 0.08, 1) 0.4s; /* O 0.4s faz as portas esperarem o texto sumir para abrir */
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+        }
+
+        /* Lado Esquerdo */
+        .cover::before {
+            left: 0;
+            border-right: 2px solid var(--rosa);
+        }
+
+        /* Lado Direito */
+        .cover::after {
+            right: 0;
+            border-left: 2px solid var(--rosa);
+        }
+
+        /* O Conteúdo da Capa (Textos e Botão) */
+        .cover-content {
+            position: relative;
+            z-index: 2; /* Na frente das portas */
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        /* --- ANIMAÇÃO QUANDO CLICA EM ABRIR --- */
+        
+        /* 1. O texto e botão somem suavemente */
+        .cover.open .cover-content {
             opacity: 0;
+            transform: scale(1.1);
             pointer-events: none;
         }
 
+        /* 2. A porta esquerda desliza para fora */
+        .cover.open::before {
+            transform: translateX(-100%);
+        }
+
+        /* 3. A porta direita desliza para fora */
+        .cover.open::after {
+            transform: translateX(100%);
+        }
+
+        /* Desativa cliques na capa após abrir */
+        .cover.open {
+            pointer-events: none;
+            transition: visibility 0s linear 2s;
+            visibility: hidden; /* Esconde a div inteira após a animação terminar */
+        }
+        /* ========================================= */
+
         .title-cursive {
             font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: var(--rosa);
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
         }
 
         .subtitle {
             font-size: 1.2rem;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             color: var(--prata);
             margin-bottom: 50px;
+            font-weight: 300;
         }
 
-        /* Botão Interativo */
-        .btn {
-            background: transparent;
-            border: 2px solid var(--rosa);
-            color: var(--rosa);
-            padding: 15px 30px;
-            font-size: 1rem;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-            width: 80%;
-        }
-
-        .btn:hover, .btn-open:hover {
-            background: var(--rosa);
-            color: var(--azul-escuro);
-            box-shadow: 0 0 15px var(--rosa);
-        }
-
+        /* Botão Interativo Principal */
         .btn-open {
-            background: var(--prata);
+            background: linear-gradient(135deg, var(--prata) 0%, #b8b8b8 100%);
             color: var(--azul-escuro);
             border: none;
             padding: 15px 40px;
@@ -121,17 +151,19 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2), inset 0 -3px 5px rgba(0,0,0,0.2);
             animation: pulse 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); }
+            50% { transform: scale(1.05); box-shadow: 0 5px 25px rgba(244, 172, 183, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); }
         }
 
-        /* Tela 2: Conteúdo do Convite */
+        /* Tela 2: Conteúdo Interno */
         .content {
             padding: 30px 20px;
             text-align: center;
@@ -140,9 +172,15 @@
             flex-direction: column;
             justify-content: space-around;
             overflow-y: auto;
+            opacity: 0;
+            animation: fadeInContent 1s forwards;
+            animation-delay: 1s; /* Espera a capa abrir para aparecer */
         }
 
-        /* Estilo da Foto da Debutante */
+        @keyframes fadeInContent {
+            to { opacity: 1; }
+        }
+
         .foto-debutante {
             width: 140px;
             height: 140px;
@@ -178,6 +216,7 @@
             color: var(--prata-brilho);
             font-weight: 600;
             font-size: 1.1rem;
+            letter-spacing: 1px;
         }
 
         .buttons-container {
@@ -186,6 +225,29 @@
             align-items: center;
             gap: 15px;
             margin-top: 10px;
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid var(--rosa);
+            color: var(--rosa);
+            padding: 12px 30px;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 85%;
+        }
+
+        .btn:hover {
+            background: var(--rosa);
+            color: var(--azul-escuro);
+            box-shadow: 0 0 15px rgba(244, 172, 183, 0.5);
         }
 
         .rsvp-text {
@@ -198,27 +260,28 @@
 </head>
 <body>
 
-    <!-- Tag de Áudio Oculta -->
-    <!-- Substitua "sua-musica.mp3" pelo link ou caminho do seu arquivo de áudio -->
+    <!-- Música -->
     <audio id="musicaFundo" loop>
         <source src="sua-musica.mp3" type="audio/mpeg">
     </audio>
 
     <div class="mobile-container">
         
-        <!-- Tela Inicial (Capa) -->
+        <!-- Tela Inicial (Capa com Efeito de Abertura) -->
         <div class="cover" id="coverScreen">
-            <h1 class="title-cursive">Ana Julia</h1>
-            <p class="subtitle">15 Anos</p>
-            <p style="margin-bottom: 30px; font-size: 0.9rem;">Você tem um convite muito especial...</p>
-            <button class="btn-open" onclick="abrirConvite()">TOCAR PARA ABRIR</button>
+            <div class="cover-content">
+                <h1 class="title-cursive">Ana Julia</h1>
+                <p class="subtitle">15 Anos</p>
+                <p style="margin-bottom: 40px; font-size: 0.9rem; color: #a8a8a8;">Você tem um convite muito especial...</p>
+                <!-- Botão simula o fecho/selo do convite -->
+                <button class="btn-open" onclick="abrirConvite()">TOCAR PARA ABRIR</button>
+            </div>
         </div>
 
-        <!-- Tela Principal (Convite Aberto) -->
+        <!-- Tela Principal (Convite Interno) -->
         <div class="content">
             <div>
-                <!-- Foto da Debutante -->
-                <!-- Substitua "sua-foto.jpg" pelo caminho da foto da Ana Julia -->
+                <!-- Foto -->
                 <img src="sua-foto.JPG" alt="Ana Julia" class="foto-debutante">
                 
                 <h1>Ana Julia</h1>
@@ -248,17 +311,16 @@
     </div>
 
     <script>
-        // Função para acionar a animação e dar play na música
         function abrirConvite() {
             const cover = document.getElementById('coverScreen');
             const musica = document.getElementById('musicaFundo');
             
-            // Inicia a animação de subir a capa
+            // Aciona as classes de animação da capa
             cover.classList.add('open');
             
-            // Dá play na música (o .catch previne erros no console caso algum navegador bloqueie)
+            // Inicia a música
             musica.play().catch(function(error) {
-                console.log("Autoplay de áudio bloqueado pelas políticas do navegador.", error);
+                console.log("Autoplay de áudio bloqueado.", error);
             });
         }
     </script>
