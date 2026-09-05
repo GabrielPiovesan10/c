@@ -4,20 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- ========================================== -->
-    <!-- META TAGS PARA WHATSAPP / REDES SOCIAIS    -->
-    <!-- ========================================== -->
     <title>Convite 15 Anos - Ana Julia</title>
     <meta name="description" content="Você tem um convite muito especial! Clique para abrir e confirmar sua presença nos 15 anos da Ana Julia.">
     
-    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
     <meta property="og:title" content="Convite Especial: 15 Anos - Ana Julia ✨">
     <meta property="og:description" content="Venha celebrar o capítulo mais mágico da minha vida. Clique para abrir o convite!">
-    
     <meta property="og:image" content="foto_whatsapp.JPG">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
-    <!-- ========================================== -->
 
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     
@@ -29,7 +23,6 @@
             --prata-brilho: #ffffff;
             --prata-metal: #a8a8a8;
             --rosa: #f4acb7;
-            --rosa-escuro: #d58996;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,7 +45,6 @@
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             z-index: 30; pointer-events: auto;
         }
-
         .cover::before, .cover::after {
             content: ''; position: absolute; top: 0; width: 50%; height: 100%;
             background: linear-gradient(135deg, var(--azul-escuro) 0%, #070c1d 100%);
@@ -67,7 +59,6 @@
             background: radial-gradient(circle, rgba(7, 12, 29, 1) 25%, transparent 70%);
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
-
         .cover.open .cover-content { opacity: 0; transform: scale(1.1); pointer-events: none; }
         .cover.open::before { transform: translateX(-100%); }
         .cover.open::after { transform: translateX(100%); }
@@ -101,35 +92,37 @@
             background: linear-gradient(to bottom, rgba(7, 12, 29, 0.2) 0%, rgba(7, 12, 29, 0.8) 100%);
         }
 
-        /* ================= ANIMAÇÃO FLUIDA ================= */
-        .draw-path {
-            stroke-dasharray: 1;
-            stroke-dashoffset: 1;
-            opacity: 0;
+        /* ================= NOVA ANIMAÇÃO ANTI-BUG ================= */
+        .floral-frame {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 5; pointer-events: none;
+            filter: drop-shadow(0 0 6px rgba(244, 172, 183, 0.5));
         }
-        @keyframes drawFluid {
-            0% { stroke-dashoffset: 1; opacity: 0; }
-            5% { opacity: 1; }
-            100% { stroke-dashoffset: 0; opacity: 1; }
+
+        .draw-line {
+            stroke-dasharray: 2500;
+            stroke-dashoffset: 2500;
+            fill: transparent;
+        }
+
+        @keyframes drawPerfect {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .floral-frame.start-drawing .vine {
+            animation: drawPerfect 3s ease-out forwards;
+            animation-delay: 0.5s;
         }
         
-        svg.start-drawing .vine { animation: drawFluid 3.5s ease-out forwards; animation-delay: 0.5s; }
-        svg.start-drawing .leaf { animation: drawFluid 2s ease-out forwards; animation-delay: 1.5s; }
-        svg.start-drawing .petal { animation: drawFluid 1.2s ease-out forwards; }
-        svg.start-drawing .petal.p1 { animation-delay: 2.2s; }
-        svg.start-drawing .petal.p2 { animation-delay: 2.4s; }
-        svg.start-drawing .petal.p3 { animation-delay: 2.6s; }
-        svg.start-drawing .petal.p4 { animation-delay: 2.8s; }
-        svg.start-drawing .petal.p5 { animation-delay: 3.0s; }
-        svg.start-drawing .petal.p6 { animation-delay: 3.2s; }
-
-        .petal {
-            fill: rgba(244, 172, 183, 0);
-            transition: fill 2s ease;
+        .floral-frame.start-drawing .flower {
+            animation: drawPerfect 2s ease-out forwards;
+            animation-delay: 1.5s;
         }
-        svg.start-drawing .petal {
-            fill: rgba(244, 172, 183, 0.15); /* Pinta suavemente no final */
-            transition-delay: 4.5s; 
+
+        .floral-frame.start-drawing .flower-fill {
+            transition: fill 2s ease;
+            transition-delay: 3s;
+            fill: rgba(244, 172, 183, 0.15); /* Pinta o miolo das flores no final */
         }
 
         /* ================= TELA 2: TEXTOS QUE ROLAM ================= */
@@ -146,7 +139,7 @@
         .delay-3 { animation-delay: 1.4s; } .delay-4 { animation-delay: 1.6s; } 
         .delay-5 { animation-delay: 1.8s; }
 
-        .header-text { margin-top: 100px; } 
+        .header-text { margin-top: 100px; position: relative; z-index: 15; } 
         .header-text h1 { 
             font-family: 'Great Vibes', cursive; font-size: 4.3rem; 
             color: var(--prata-brilho); text-shadow: 2px 2px 15px rgba(0,0,0,1); 
@@ -224,125 +217,77 @@
 
         <div class="bg-debutante"></div>
         
-        <!-- O Segredo: a Inner-Content engloba tudo. As flores desenham contornando o texto e sobem quando você faz scroll! -->
+        <!-- MOLDURA FLORAL PERFEITA (À prova de bugs, desenha por trás do nome Ana Julia) -->
+        <svg class="floral-frame" id="floralBackground" viewBox="0 0 375 812" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="roseGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#f4acb7" />
+                    <stop offset="100%" stop-color="#ffffff" />
+                </linearGradient>
+            </defs>
+
+            <g stroke="url(#roseGradient)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                
+                <!-- Ramo Esquerdo (Sobe da base esquerda e curva por cima do lado esquerdo do nome) -->
+                <path class="draw-line vine" d="M -10,850 C 50,600 -30,400 30,200 C 45,130 80,80 140,60" />
+                
+                <!-- Flores Esquerdas (Criadas do zero, 4 pétalas contínuas perfeitas + botão central) -->
+                <!-- Flor Base -->
+                <path class="draw-line flower flower-fill" d="M 0,0 C -15,-20 -15,-40 0,-40 C 15,-40 15,-20 0,0 C 20,-15 40,-15 40,0 C 40,15 20,15 0,0 C 15,20 15,40 0,40 C -15,40 -15,20 0,0 C -20,15 -40,15 -40,0 C -40,-15 -20,-15 0,0 Z M 0,0 C -5,-5 5,-10 10,-5 C 15,5 0,10 -5,5 C -10,0 0,-5 0,-5 Z" transform="translate(20, 650) scale(0.7) rotate(15)" />
+                <!-- Flor Meio -->
+                <path class="draw-line flower flower-fill" d="M 0,0 C -15,-20 -15,-40 0,-40 C 15,-40 15,-20 0,0 C 20,-15 40,-15 40,0 C 40,15 20,15 0,0 C 15,20 15,40 0,40 C -15,40 -15,20 0,0 C -20,15 -40,15 -40,0 C -40,-15 -20,-15 0,0 Z M 0,0 C -5,-5 5,-10 10,-5 C 15,5 0,10 -5,5 C -10,0 0,-5 0,-5 Z" transform="translate(10, 400) scale(0.5) rotate(45)" />
+                <!-- Flor Topo (Moldurando o nome 'Ana') -->
+                <path class="draw-line flower flower-fill" d="M 0,0 C -15,-20 -15,-40 0,-40 C 15,-40 15,-20 0,0 C 20,-15 40,-15 40,0 C 40,15 20,15 0,0 C 15,20 15,40 0,40 C -15,40 -15,20 0,0 C -20,15 -40,15 -40,0 C -40,-15 -20,-15 0,0 Z M 0,0 C -5,-5 5,-10 10,-5 C 15,5 0,10 -5,5 C -10,0 0,-5 0,-5 Z" transform="translate(140, 60) scale(0.8) rotate(-15)" />
+
+                <!-- Ramo Direito (Sobe da base direita e curva por cima do lado direito do nome) -->
+                <path class="draw-line vine" d="M 385,850 C 325,600 405,400 345,200 C 330,130 295,80 235,60" />
+                
+                <!-- Flores Direitas -->
+                <!-- Flor Base -->
+                <path class="draw-line flower flower-fill" d="M 0,0 C -15,-20 -15,-40 0,-40 C 15,-40 15,-20 0,0 C 20,-15 40,-15 40,0 C 40,15 20,15 0,0 C 15,20 15,40 0,40 C -15,40 -15,20 0,0 C -20,15 -40,15 -40,0 C -40,-15 -20,-15 0,0 Z M 0,0 C -5,-5 5,-10 10,-5 C 15,5 0,10 -5,5 C -10,0 0,-5 0,-5 Z" transform="translate(355, 650) scale(0.7) rotate(-15)" />
+                <!-- Flor Meio -->
+                <path class="draw-line flower flower-fill" d="M 0,0 C -15,-20 -15,-40 0,-40 C 15,-40 15,-20 0,0 C 20,-15 40,-15 40,0 C 40,15 20,15 0,0 C 15,20 15,40 0,40 C -15,40 -15,20 0,0 C -20,15 -40,15 -40,0 C -40,-15 -20,-15 0,0 Z M 0,0 C -5,-5 5,-10 10,-5 C 15,5 0,10 -5,5 C -10,0 0,-5 0,-5 Z" transform="translate(365, 400) scale(0.5) rotate(-45)" />
+                <!-- Flor Topo (Moldurando o nome 'Julia') -->
+                <path class="draw-line flower flower-fill" d="M 0,0 C -15,-20 -15,-40 0,-40 C 15,-40 15,-20 0,0 C 20,-15 40,-15 40,0 C 40,15 20,15 0,0 C 15,20 15,40 0,40 C -15,40 -15,20 0,0 C -20,15 -40,15 -40,0 C -40,-15 -20,-15 0,0 Z M 0,0 C -5,-5 5,-10 10,-5 C 15,5 0,10 -5,5 C -10,0 0,-5 0,-5 Z" transform="translate(235, 60) scale(0.8) rotate(15)" />
+                
+            </g>
+        </svg>
+
         <div class="content" id="scrollArea">
             <div class="inner-content" id="conteudoInterno">
                 
-                <!-- SVG Mágico em Tela Cheia -->
-                <svg id="floralBackground" viewBox="0 0 400 1000" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 100%; opacity: 0.95; filter: drop-shadow(0 0 6px rgba(244, 172, 183, 0.5)); z-index: 0; pointer-events: none;" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="roseGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#f4acb7" />
-                            <stop offset="100%" stop-color="#ffffff" />
-                        </linearGradient>
-                        
-                        <!-- Flor Completa Base -->
-                        <g id="flower-main">
-                            <circle class="draw-path petal p1" pathLength="1" cx="0" cy="0" r="4.5" />
-                            <path class="draw-path petal p2" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" />
-                            <path class="draw-path petal p3" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" transform="rotate(72)" />
-                            <path class="draw-path petal p4" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" transform="rotate(144)" />
-                            <path class="draw-path petal p5" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" transform="rotate(216)" />
-                            <path class="draw-path petal p6" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" transform="rotate(288)" />
-                        </g>
+                <div class="header-text fade-up delay-1">
+                    <h1>Ana Julia</h1>
+                    <div class="ornament">✦ ✧ ✦</div>
+                </div>
 
-                        <!-- Botão de Rosa -->
-                        <g id="flower-bud">
-                            <path class="draw-path petal p2" pathLength="1" d="M 0,0 C -15,-20 -5,-35 0,-40 C 5,-35 15,-20 0,0 Z" />
-                            <path class="draw-path leaf" pathLength="1" d="M 0,0 C -15,0 -20,10 -10,15 C -5,10 -5,0 0,0 Z" />
-                            <path class="draw-path leaf" pathLength="1" d="M 0,0 C 15,0 20,10 10,15 C 5,10 5,0 0,0 Z" />
-                        </g>
-                        
-                        <!-- Folhinha Unitária -->
-                        <g id="single-leaf">
-                            <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" />
-                        </g>
-                    </defs>
+                <div class="texto-emocao fade-up delay-2">
+                    <p>"Completar 15 anos é o início de uma nova e linda fase, um momento mágico onde os sonhos começam a ganhar asas. Ter pessoas tão especiais como vocês ao meu lado para compartilhar esse dia torna tudo ainda mais inesquecível e perfeito."</p>
+                </div>
 
-                    <g stroke="url(#roseGradient)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        
-                        <!-- ================= RAMO ESQUERDO ================= -->
-                        <!-- Sobe contornando o nome Ana Julia com um arco majestoso (C 40, 140 70, 140 60, 90) -->
-                        <path class="draw-path vine" pathLength="1" d="M -10, 1050 C 20, 800 20, 600 15, 400 C 10, 300 0, 220 20, 180 C 40, 140 70, 140 60, 90 C 50, 40 10, 50 0, 0" />
-                        
-                        <!-- Flores Esquerdas -->
-                        <g transform="translate(15, 850) scale(0.9) rotate(15)"> <use href="#flower-main" /> </g>
-                        <g transform="translate(20, 650) scale(0.7) rotate(30)"> <use href="#flower-bud" /> </g>
-                        <g transform="translate(15, 480) scale(0.8) rotate(-20)"> <use href="#flower-main" /> </g>
-                        <g transform="translate(25, 270) scale(0.6) rotate(60)"> <use href="#flower-bud" /> </g>
-                        <g transform="translate(55, 140) scale(0.85) rotate(10)"> <use href="#flower-main" /> </g> <!-- Essa moldura exatamente o nome Ana Julia -->
-                        <g transform="translate(25, 50) scale(0.7) rotate(-45)"> <use href="#flower-bud" /> </g>
+                <div class="details fade-up delay-3">
+                    <p><span class="highlight">DATA</span><br>16 de Outubro</p>
+                    <p><span class="highlight">HORÁRIO DE CHEGADA</span><br>Às 19:30</p>
+                    <p><span class="highlight">LOCAL</span><br>Raliflores, Cascalho</p>
+                </div>
 
-                        <!-- Folhas Esquerdas -->
-                        <g transform="translate(10, 900) rotate(-45)"><use href="#single-leaf"/></g>
-                        <g transform="translate(20, 750) rotate(-10)"><use href="#single-leaf"/></g>
-                        <g transform="translate(18, 550) rotate(-60)"><use href="#single-leaf"/></g>
-                        <g transform="translate(15, 380) rotate(-20)"><use href="#single-leaf"/></g>
-                        <g transform="translate(12, 220) rotate(-70)"><use href="#single-leaf"/></g>
-                        <g transform="translate(35, 180) rotate(-15)"><use href="#single-leaf"/></g>
-                        <g transform="translate(40, 90) rotate(-45)"><use href="#single-leaf"/></g>
-
-
-                        <!-- ================= RAMO DIREITO ================= -->
-                        <path class="draw-path vine" pathLength="1" d="M 410, 1050 C 380, 800 380, 600 385, 400 C 390, 300 400, 220 380, 180 C 360, 140 330, 140 340, 90 C 350, 40 390, 50 400, 0" />
-                        
-                        <!-- Flores Direitas -->
-                        <g transform="translate(385, 850) scale(0.9) rotate(-15)"> <use href="#flower-main" /> </g>
-                        <g transform="translate(380, 650) scale(0.7) rotate(-30)"> <use href="#flower-bud" /> </g>
-                        <g transform="translate(385, 480) scale(0.8) rotate(20)"> <use href="#flower-main" /> </g>
-                        <g transform="translate(375, 270) scale(0.6) rotate(-60)"> <use href="#flower-bud" /> </g>
-                        <g transform="translate(345, 140) scale(0.85) rotate(-10)"> <use href="#flower-main" /> </g> <!-- Essa moldura do lado direito do nome Ana Julia -->
-                        <g transform="translate(375, 50) scale(0.7) rotate(45)"> <use href="#flower-bud" /> </g>
-
-                        <!-- Folhas Direitas -->
-                        <g transform="translate(390, 900) rotate(225)"><use href="#single-leaf"/></g>
-                        <g transform="translate(380, 750) rotate(190)"><use href="#single-leaf"/></g>
-                        <g transform="translate(382, 550) rotate(240)"><use href="#single-leaf"/></g>
-                        <g transform="translate(385, 380) rotate(200)"><use href="#single-leaf"/></g>
-                        <g transform="translate(388, 220) rotate(250)"><use href="#single-leaf"/></g>
-                        <g transform="translate(365, 180) rotate(195)"><use href="#single-leaf"/></g>
-                        <g transform="translate(360, 90) rotate(225)"><use href="#single-leaf"/></g>
-                    </g>
-                </svg>
-
-                <!-- Todos os textos estão protegidos com z-index para brilharem por cima do fundo -->
-                <div style="position: relative; z-index: 2;">
-                    
-                    <div class="header-text fade-up delay-1">
-                        <h1>Ana Julia</h1>
-                        <div class="ornament">✦ ✧ ✦</div>
+                <div class="countdown-wrapper fade-up delay-4">
+                    <div class="countdown-title">Contagem Regressiva</div>
+                    <div class="countdown">
+                        <div class="time-box"><span id="dias">00</span><small>Dias</small></div>
+                        <div class="time-box"><span id="horas">00</span><small>Horas</small></div>
+                        <div class="time-box"><span id="minutos">00</span><small>Min</small></div>
+                        <div class="time-box"><span id="segundos">00</span><small>Seg</small></div>
                     </div>
+                </div>
 
-                    <div class="texto-emocao fade-up delay-2">
-                        <p>"Completar 15 anos é o início de uma nova e linda fase, um momento mágico onde os sonhos começam a ganhar asas. Ter pessoas tão especiais como vocês ao meu lado para compartilhar esse dia torna tudo ainda mais inesquecível e perfeito."</p>
-                    </div>
-
-                    <div class="details fade-up delay-3">
-                        <p><span class="highlight">DATA</span><br>16 de Outubro</p>
-                        <p><span class="highlight">HORÁRIO DE CHEGADA</span><br>Às 19:30</p>
-                        <p><span class="highlight">LOCAL</span><br>Raliflores, Cascalho</p>
-                    </div>
-
-                    <div class="countdown-wrapper fade-up delay-4">
-                        <div class="countdown-title">Contagem Regressiva</div>
-                        <div class="countdown">
-                            <div class="time-box"><span id="dias">00</span><small>Dias</small></div>
-                            <div class="time-box"><span id="horas">00</span><small>Horas</small></div>
-                            <div class="time-box"><span id="minutos">00</span><small>Min</small></div>
-                            <div class="time-box"><span id="segundos">00</span><small>Seg</small></div>
-                        </div>
-                    </div>
-
-                    <!-- Botões -->
-                    <div class="buttons-container fade-up delay-5">
-                        <p class="rsvp-text">Confirme sua presença até 20/09</p>
-                        <button class="btn" onclick="abrirModal()">Confirmar Presença</button>
-                        <a href="https://maps.google.com/?q=Raliflores,+Cascalho,+Cordeirópolis" target="_blank" class="btn">
-                            Localização (Maps)
-                        </a>
-                    </div>
-
-                </div> <!-- Fim z-index -->
+                <div class="buttons-container fade-up delay-5">
+                    <p class="rsvp-text">Confirme sua presença até 20/09</p>
+                    <button class="btn" onclick="abrirModal()">Confirmar Presença</button>
+                    <a href="https://maps.google.com/?q=Raliflores,+Cascalho,+Cordeirópolis" target="_blank" class="btn">
+                        Localização (Maps)
+                    </a>
+                </div>
             </div>
         </div>
         
@@ -380,7 +325,7 @@
             const musica = document.getElementById('musicaFundo');
             const conteudo = document.getElementById('conteudoInterno');
             
-            // Ativa o desenho mágico fluido
+            // Ativa o desenho fixo na tela
             document.getElementById('floralBackground').classList.add('start-drawing');
             
             cover.classList.add('open');
