@@ -125,7 +125,6 @@
         .bg-debutante {
             position: absolute; 
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Fundo Azul muito mais elegante, com um brilho no centro */
             background: radial-gradient(circle at center, #15274d 0%, var(--azul-escuro) 100%);
             z-index: 1;
         }
@@ -139,51 +138,55 @@
         .floral-background {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2; /* Fica acima do fundo azul e atrás dos textos */
+            z-index: 2; 
             pointer-events: none;
             overflow: hidden;
         }
         
         .floral-corner {
             position: absolute;
-            width: 280px;
-            height: 280px;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 6px rgba(244, 172, 183, 0.4)); /* Brilho mágico nas flores */
+            width: 330px;
+            height: 330px;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 8px rgba(244, 172, 183, 0.6));
         }
-        .floral-corner.top-left { top: -20px; left: -20px; }
-        .floral-corner.bottom-right { bottom: -20px; right: -20px; }
-
-        .draw-path {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000; /* Inicia invisível */
-        }
-
-        /* Animação que é ativada via JavaScript quando clica no botão */
-        .floral-background.start-drawing .draw-path {
-            animation: drawFlower forwards;
-        }
-
-        /* Ordem de desenho: Primeiro os galhos/ramos (duram 3s) */
-        .floral-background.start-drawing .floral-corner > g > .draw-path {
-            animation-duration: 3s;
-            animation-delay: 0.8s;
-            animation-timing-function: ease-out;
-        }
+        .floral-corner.top-left { top: -30px; left: -30px; }
         
-        /* Depois as folhinhas nascem (começam aos 2.5s) */
-        .floral-background.start-drawing .floral-corner > g > .draw-path:nth-of-type(n+4) {
-            animation-duration: 1.5s;
-            animation-delay: 2.5s;
+        /* A flor de baixo é exatamente a mesma de cima, apenas rotacionada perfeitamente */
+        .floral-corner.bottom-right { bottom: -30px; right: -30px; transform: rotate(180deg); }
+
+        /* A mágica da fluidez: pathLength normaliza o tamanho da linha para 1, evitando travamentos */
+        .draw-path {
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+            opacity: 0;
         }
 
-        /* Por último as rosas desabrocham linha por linha */
-        .floral-background.start-drawing .rose .draw-path:nth-child(1) { animation-duration: 2s; animation-delay: 3.5s; }
-        .floral-background.start-drawing .rose .draw-path:nth-child(2) { animation-duration: 1.5s; animation-delay: 4.5s; }
-        .floral-background.start-drawing .rose .draw-path:nth-child(3) { animation-duration: 1s; animation-delay: 5.5s; }
+        /* Animação fluida e suave */
+        @keyframes drawFluid {
+            0% { stroke-dashoffset: 1; opacity: 0; }
+            5% { opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 1; }
+        }
 
-        @keyframes drawFlower {
-            to { stroke-dashoffset: 0; }
+        /* Lógica de tempos: Ramos -> Folhas -> Pétalas da Rosa (Do centro para fora) */
+        .floral-background.start-drawing .stem { 
+            animation: drawFluid 2.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 0.5s; 
+        }
+        .floral-background.start-drawing .leaf .draw-path { 
+            animation: drawFluid 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; animation-delay: 1.5s; 
+        }
+        .floral-background.start-drawing .rose-petals .draw-path:nth-child(1) { animation: drawFluid 1.5s ease-out forwards; animation-delay: 2.2s; }
+        .floral-background.start-drawing .rose-petals .draw-path:nth-child(2) { animation: drawFluid 1.5s ease-out forwards; animation-delay: 2.5s; }
+        .floral-background.start-drawing .rose-petals .draw-path:nth-child(3) { animation: drawFluid 1.5s ease-out forwards; animation-delay: 2.8s; }
+        .floral-background.start-drawing .rose-petals .draw-path:nth-child(4) { animation: drawFluid 1.5s ease-out forwards; animation-delay: 3.1s; }
+        .floral-background.start-drawing .rose-petals .draw-path:nth-child(5) { animation: drawFluid 1.5s ease-out forwards; animation-delay: 3.4s; }
+        .floral-background.start-drawing .rose-petals .draw-path:nth-child(6) { animation: drawFluid 1.5s ease-out forwards; animation-delay: 3.7s; }
+        .floral-background.start-drawing .rose-petals .draw-path:nth-child(7) { animation: drawFluid 1.5s ease-out forwards; animation-delay: 4.0s; }
+        .floral-background.start-drawing .rose-petals .draw-path:nth-child(8) { animation: drawFluid 1.5s ease-out forwards; animation-delay: 4.3s; }
+        .floral-background.start-drawing .rose-petals .draw-path:nth-child(9) { animation: drawFluid 1.5s ease-out forwards; animation-delay: 4.6s; }
+        .floral-background.start-drawing .rose-bud .draw-path { 
+            animation: drawFluid 1.5s ease-out forwards; animation-delay: 4.2s; 
         }
 
         /* ================= TELA 2: TEXTOS QUE ROLAM ================= */
@@ -338,74 +341,102 @@
         <div class="floral-background" id="floralBackground">
             <!-- Flores Topo Esquerda -->
             <svg class="floral-corner top-left" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <g stroke="var(--rosa)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <defs>
+                    <linearGradient id="roseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f4acb7" />
+                        <stop offset="100%" stop-color="#ffffff" />
+                    </linearGradient>
+                </defs>
+                <g stroke="url(#roseGradient)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <!-- Ramos -->
-                    <path class="draw-path" d="M0,0 C100,20 150,80 180,180" />
-                    <path class="draw-path" d="M0,50 C80,60 120,120 130,220" />
-                    <path class="draw-path" d="M50,0 C60,80 120,120 220,130" />
-                    <!-- Folhas do Ramo 1 -->
-                    <path class="draw-path" d="M60,20 C80,10 100,20 90,40 C70,40 60,30 60,20 Z" />
-                    <path class="draw-path" d="M120,50 C140,40 160,50 150,70 C130,70 120,60 120,50 Z" />
-                    <!-- Folhas do Ramo 2 -->
-                    <path class="draw-path" d="M50,70 C70,60 90,70 80,90 C60,90 50,80 50,70 Z" />
-                    <path class="draw-path" d="M90,120 C110,110 130,120 120,140 C100,140 90,130 90,120 Z" />
-                    <!-- Folhas do Ramo 3 -->
-                    <path class="draw-path" d="M70,50 C60,70 70,90 90,80 C90,60 80,50 70,50 Z" />
-                    <path class="draw-path" d="M120,90 C110,110 120,130 140,120 C140,100 130,90 120,90 Z" />
-                    <path class="draw-path" d="M170,110 C160,130 170,150 190,140 C190,120 180,110 170,110 Z" />
+                    <path class="draw-path stem" pathLength="1" d="M -10,-10 Q 80,80 130,130" />
+                    <path class="draw-path stem" pathLength="1" d="M 130,130 Q 190,140 250,120" />
+                    <path class="draw-path stem" pathLength="1" d="M 130,130 Q 140,190 120,250" />
+
+                    <!-- Folhas detalhadas -->
+                    <g class="leaf">
+                        <path class="draw-path" pathLength="1" d="M 80,80 Q 130,30 160,50 Q 110,90 80,80" />
+                        <path class="draw-path" pathLength="1" d="M 80,80 Q 120,60 160,50" /> <!-- Nervura central -->
+                    </g>
+                    <g class="leaf">
+                        <path class="draw-path" pathLength="1" d="M 190,140 Q 240,170 230,210 Q 180,180 190,140" />
+                        <path class="draw-path" pathLength="1" d="M 190,140 Q 210,175 230,210" />
+                    </g>
+                    <g class="leaf">
+                        <path class="draw-path" pathLength="1" d="M 140,190 Q 90,240 50,230 Q 100,180 140,190" />
+                        <path class="draw-path" pathLength="1" d="M 140,190 Q 95,210 50,230" />
+                    </g>
+
+                    <!-- ROSA PRINCIPAL -->
+                    <g class="rose-petals">
+                        <!-- Miolo em espiral -->
+                        <path class="draw-path" pathLength="1" d="M 130,130 C 120,125 110,135 120,145 C 130,155 145,145 140,130 C 135,115 110,115 100,135 C 90,155 110,175 135,165" />
+                        <!-- Pétalas Internas -->
+                        <path class="draw-path" pathLength="1" d="M 135,165 C 160,150 160,120 140,100 C 120,80 80,90 85,120" />
+                        <path class="draw-path" pathLength="1" d="M 85,120 C 70,160 100,190 140,180 C 170,170 180,140 160,110" />
+                        <!-- Pétalas Médias -->
+                        <path class="draw-path" pathLength="1" d="M 160,110 C 140,70 80,60 55,95 C 35,125 45,170 80,190" />
+                        <path class="draw-path" pathLength="1" d="M 80,190 C 120,220 180,200 195,160 C 210,120 190,80 150,70" />
+                        <!-- Pétalas Externas -->
+                        <path class="draw-path" pathLength="1" d="M 150,70 C 100,40 30,70 30,130 C 30,180 80,230 140,220" />
+                        <!-- Linhas de Dobra da Flor -->
+                        <path class="draw-path" pathLength="1" d="M 55,95 C 65,115 85,120 100,110" />
+                        <path class="draw-path" pathLength="1" d="M 195,160 C 175,175 150,170 140,150" />
+                        <path class="draw-path" pathLength="1" d="M 140,220 C 120,200 110,180 115,160" />
+                    </g>
                     
-                    <!-- Rosas -->
-                    <g class="rose">
-                        <path class="draw-path" d="M180,180 C160,170 150,200 180,210 C210,200 200,170 180,180 Z" />
-                        <path class="draw-path" d="M170,185 C160,175 175,170 180,185 C185,170 200,175 190,185" />
-                        <path class="draw-path" d="M175,192 C170,198 190,198 185,192" />
+                    <!-- Botões de Rosa Pequenos -->
+                    <g class="rose-bud">
+                        <path class="draw-path" pathLength="1" d="M 250,120 C 240,100 270,90 280,110 C 290,130 260,140 250,120" />
+                        <path class="draw-path" pathLength="1" d="M 250,120 C 255,105 270,105 275,115 C 280,125 265,135 255,125" />
                     </g>
-                    <g class="rose">
-                        <path class="draw-path" d="M130,220 C110,210 100,240 130,250 C160,240 150,210 130,220 Z" />
-                        <path class="draw-path" d="M120,225 C110,215 125,210 130,225 C135,210 150,215 140,225" />
-                        <path class="draw-path" d="M125,232 C120,238 140,238 135,232" />
-                    </g>
-                    <g class="rose">
-                        <path class="draw-path" d="M220,130 C200,120 190,150 220,160 C250,150 240,120 220,130 Z" />
-                        <path class="draw-path" d="M210,135 C200,125 215,120 220,135 C225,120 240,125 230,135" />
-                        <path class="draw-path" d="M215,142 C210,148 230,148 225,142" />
+                    <g class="rose-bud">
+                        <path class="draw-path" pathLength="1" d="M 120,250 C 100,240 90,270 110,280 C 130,290 140,260 120,250" />
+                        <path class="draw-path" pathLength="1" d="M 120,250 C 105,255 105,270 115,275 C 125,280 135,265 125,255" />
                     </g>
                 </g>
             </svg>
 
             <!-- Flores Base Direita -->
+            <!-- Usamos exatamente a mesma estrutura para garantir a qualidade, apenas o CSS inverte ela -->
             <svg class="floral-corner bottom-right" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-                <g stroke="var(--rosa)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <!-- Ramos -->
-                    <path class="draw-path" d="M300,300 C200,280 150,220 120,120" />
-                    <path class="draw-path" d="M300,250 C220,240 180,180 170,80" />
-                    <path class="draw-path" d="M250,300 C240,220 180,180 80,170" />
-                    <!-- Folhas do Ramo 1 -->
-                    <path class="draw-path" d="M240,280 C220,290 200,280 210,260 C230,260 240,270 240,280 Z" />
-                    <path class="draw-path" d="M180,250 C160,260 140,250 150,230 C170,230 180,240 180,250 Z" />
-                    <path class="draw-path" d="M150,190 C130,200 110,190 120,170 C140,170 150,180 150,190 Z" />
-                    <!-- Folhas do Ramo 2 -->
-                    <path class="draw-path" d="M250,230 C230,240 210,230 220,210 C240,210 250,220 250,230 Z" />
-                    <path class="draw-path" d="M210,180 C190,190 170,180 180,160 C200,160 210,170 210,180 Z" />
-                    <!-- Folhas do Ramo 3 -->
-                    <path class="draw-path" d="M230,250 C240,230 230,210 210,220 C210,240 220,250 230,250 Z" />
-                    <path class="draw-path" d="M180,210 C190,190 180,170 160,180 C160,200 170,210 180,210 Z" />
+                <g stroke="url(#roseGradient)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="draw-path stem" pathLength="1" d="M -10,-10 Q 80,80 130,130" />
+                    <path class="draw-path stem" pathLength="1" d="M 130,130 Q 190,140 250,120" />
+                    <path class="draw-path stem" pathLength="1" d="M 130,130 Q 140,190 120,250" />
                     
-                    <!-- Rosas -->
-                    <g class="rose">
-                        <path class="draw-path" d="M120,120 C140,130 150,100 120,90 C90,100 100,130 120,120 Z" />
-                        <path class="draw-path" d="M130,115 C140,125 125,130 120,115 C115,130 100,125 110,115" />
-                        <path class="draw-path" d="M125,108 C130,102 110,102 115,108" />
+                    <g class="leaf">
+                        <path class="draw-path" pathLength="1" d="M 80,80 Q 130,30 160,50 Q 110,90 80,80" />
+                        <path class="draw-path" pathLength="1" d="M 80,80 Q 120,60 160,50" /> 
                     </g>
-                    <g class="rose">
-                        <path class="draw-path" d="M170,80 C190,90 200,60 170,50 C140,60 150,90 170,80 Z" />
-                        <path class="draw-path" d="M180,75 C190,85 175,90 170,75 C165,90 150,85 160,75" />
-                        <path class="draw-path" d="M175,68 C180,62 160,62 165,68" />
+                    <g class="leaf">
+                        <path class="draw-path" pathLength="1" d="M 190,140 Q 240,170 230,210 Q 180,180 190,140" />
+                        <path class="draw-path" pathLength="1" d="M 190,140 Q 210,175 230,210" />
                     </g>
-                    <g class="rose">
-                        <path class="draw-path" d="M80,170 C100,180 110,150 80,140 C50,150 60,180 80,170 Z" />
-                        <path class="draw-path" d="M90,165 C100,175 85,180 80,165 C75,180 60,175 70,165" />
-                        <path class="draw-path" d="M85,158 C90,152 70,152 75,158" />
+                    <g class="leaf">
+                        <path class="draw-path" pathLength="1" d="M 140,190 Q 90,240 50,230 Q 100,180 140,190" />
+                        <path class="draw-path" pathLength="1" d="M 140,190 Q 95,210 50,230" />
+                    </g>
+
+                    <g class="rose-petals">
+                        <path class="draw-path" pathLength="1" d="M 130,130 C 120,125 110,135 120,145 C 130,155 145,145 140,130 C 135,115 110,115 100,135 C 90,155 110,175 135,165" />
+                        <path class="draw-path" pathLength="1" d="M 135,165 C 160,150 160,120 140,100 C 120,80 80,90 85,120" />
+                        <path class="draw-path" pathLength="1" d="M 85,120 C 70,160 100,190 140,180 C 170,170 180,140 160,110" />
+                        <path class="draw-path" pathLength="1" d="M 160,110 C 140,70 80,60 55,95 C 35,125 45,170 80,190" />
+                        <path class="draw-path" pathLength="1" d="M 80,190 C 120,220 180,200 195,160 C 210,120 190,80 150,70" />
+                        <path class="draw-path" pathLength="1" d="M 150,70 C 100,40 30,70 30,130 C 30,180 80,230 140,220" />
+                        <path class="draw-path" pathLength="1" d="M 55,95 C 65,115 85,120 100,110" />
+                        <path class="draw-path" pathLength="1" d="M 195,160 C 175,175 150,170 140,150" />
+                        <path class="draw-path" pathLength="1" d="M 140,220 C 120,200 110,180 115,160" />
+                    </g>
+                    
+                    <g class="rose-bud">
+                        <path class="draw-path" pathLength="1" d="M 250,120 C 240,100 270,90 280,110 C 290,130 260,140 250,120" />
+                        <path class="draw-path" pathLength="1" d="M 250,120 C 255,105 270,105 275,115 C 280,125 265,135 255,125" />
+                    </g>
+                    <g class="rose-bud">
+                        <path class="draw-path" pathLength="1" d="M 120,250 C 100,240 90,270 110,280 C 130,290 140,260 120,250" />
+                        <path class="draw-path" pathLength="1" d="M 120,250 C 105,255 105,270 115,275 C 125,280 135,265 125,255" />
                     </g>
                 </g>
             </svg>
@@ -494,7 +525,7 @@
             const musica = document.getElementById('musicaFundo');
             const conteudo = document.getElementById('conteudoInterno');
             
-            // Adiciona a classe que inicia o desenho das flores mágicas no fundo
+            // Adiciona a classe que inicia o desenho das rosas no fundo
             document.getElementById('floralBackground').classList.add('start-drawing');
             
             cover.classList.add('open');
