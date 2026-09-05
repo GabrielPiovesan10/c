@@ -15,10 +15,8 @@
     <meta property="og:description" content="Venha celebrar o capítulo mais mágico da minha vida. Clique para abrir o convite!">
     
     <!-- AQUI FICA A IMAGEM QUE APARECE NO WHATSAPP (DIFERENTE DA DO FUNDO) -->
-    <!-- Quando você hospedar o site, coloque o link completo aqui, ex: https://seusite.com/foto-whatsapp.jpg -->
     <meta property="og:image" content="foto_whatsapp.JPG">
     
-    <!-- Diz aos aplicativos que é um site -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
     <!-- ========================================== -->
@@ -43,13 +41,12 @@
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* O segredo: cola o convite no topo da tela */
-            height: 100dvh; /* Mantém a proporção exata da tela visível */
-            margin: 0; /* Remove margens fantasmas do navegador */
+            align-items: flex-start; 
+            height: 100dvh; 
+            margin: 0; 
             color: var(--prata);
             overflow: hidden; 
         }
-
         
         .mobile-container {
             width: 100%;
@@ -124,18 +121,69 @@
             100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); }
         }
 
-        /* ================= TELA 2: FOTO DE FUNDO ================= */
+        /* ================= TELA 2: FUNDO AZUL ELEGANTE ================= */
         .bg-debutante {
             position: absolute; 
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Imagem de fundo removida e substituída por um gradiente azul elegante */
-            background: linear-gradient(135deg, #152b5e 0%, var(--azul-escuro) 100%);
+            /* Fundo Azul muito mais elegante, com um brilho no centro */
+            background: radial-gradient(circle at center, #15274d 0%, var(--azul-escuro) 100%);
             z-index: 1;
         }
         .bg-debutante::after {
             content: '';
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(7, 12, 29, 0.2) 0%, rgba(7, 12, 29, 0.8) 100%);
+        }
+
+        /* ================= TELA 2: FLORES SENDO DESENHADAS ================= */
+        .floral-background {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2; /* Fica acima do fundo azul e atrás dos textos */
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .floral-corner {
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 6px rgba(244, 172, 183, 0.4)); /* Brilho mágico nas flores */
+        }
+        .floral-corner.top-left { top: -20px; left: -20px; }
+        .floral-corner.bottom-right { bottom: -20px; right: -20px; }
+
+        .draw-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000; /* Inicia invisível */
+        }
+
+        /* Animação que é ativada via JavaScript quando clica no botão */
+        .floral-background.start-drawing .draw-path {
+            animation: drawFlower forwards;
+        }
+
+        /* Ordem de desenho: Primeiro os galhos/ramos (duram 3s) */
+        .floral-background.start-drawing .floral-corner > g > .draw-path {
+            animation-duration: 3s;
+            animation-delay: 0.8s;
+            animation-timing-function: ease-out;
+        }
+        
+        /* Depois as folhinhas nascem (começam aos 2.5s) */
+        .floral-background.start-drawing .floral-corner > g > .draw-path:nth-of-type(n+4) {
+            animation-duration: 1.5s;
+            animation-delay: 2.5s;
+        }
+
+        /* Por último as rosas desabrocham linha por linha */
+        .floral-background.start-drawing .rose .draw-path:nth-child(1) { animation-duration: 2s; animation-delay: 3.5s; }
+        .floral-background.start-drawing .rose .draw-path:nth-child(2) { animation-duration: 1.5s; animation-delay: 4.5s; }
+        .floral-background.start-drawing .rose .draw-path:nth-child(3) { animation-duration: 1s; animation-delay: 5.5s; }
+
+        @keyframes drawFlower {
+            to { stroke-dashoffset: 0; }
         }
 
         /* ================= TELA 2: TEXTOS QUE ROLAM ================= */
@@ -148,10 +196,7 @@
             padding-bottom: 50px; 
         }
 
-        .inner-content {
-            padding: 40px 20px;
-            text-align: center;
-        }
+        .inner-content { padding: 40px 20px; text-align: center; }
 
         .fade-up { opacity: 0; transform: translateY(30px); }
         .inner-content.show .fade-up { animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
@@ -173,22 +218,14 @@
         .ornament { color: var(--rosa); font-size: 1.5rem; margin: 5px 0; font-weight: 100; letter-spacing: 5px; }
 
         .texto-emocao {
-            margin-top: 25px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.4);
-            border-left: 3px solid var(--rosa);
-            border-right: 3px solid var(--rosa);
-            border-radius: 10px;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            margin-top: 25px; padding: 20px; background: rgba(0, 0, 0, 0.4);
+            border-left: 3px solid var(--rosa); border-right: 3px solid var(--rosa);
+            border-radius: 10px; backdrop-filter: blur(4px); box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
         
         .texto-emocao p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--prata-brilho);
-            font-style: italic;
-            text-shadow: 1px 1px 3px rgba(0,0,0,1);
+            font-size: 0.95rem; line-height: 1.6; color: var(--prata-brilho);
+            font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,1);
         }
 
         .details { margin-top: 30px; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; border: 1px solid rgba(224, 224, 224, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(4px); }
@@ -197,11 +234,8 @@
         .highlight { color: var(--rosa); font-weight: 600; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase; }
 
         .countdown-wrapper {
-            margin: 30px 0; padding: 20px 10px;
-            background: rgba(255, 255, 255, 0.08); border-radius: 15px;
-            border: 1px solid var(--prata-metal); 
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px); 
+            margin: 30px 0; padding: 20px 10px; background: rgba(255, 255, 255, 0.08); border-radius: 15px;
+            border: 1px solid var(--prata-metal); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); 
         }
         
         .countdown-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--prata-brilho); margin-bottom: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
@@ -229,8 +263,7 @@
         /* ================= PARTÍCULAS ================= */
         .sparkle {
             position: absolute; border-radius: 50%; opacity: 0;
-            z-index: 5; 
-            animation: floatUp linear infinite; pointer-events: none;
+            z-index: 5; animation: floatUp linear infinite; pointer-events: none;
         }
         @keyframes floatUp {
             0% { transform: translateY(100px) scale(0.5); opacity: 0; }
@@ -241,96 +274,43 @@
 
         /* ================= MODAL DE CONFIRMAÇÃO ================= */
         .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: 50;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.4s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 50;
+            display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
         }
-        .modal-overlay.active {
-            opacity: 1; pointer-events: auto;
-        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
 
         .modal-box {
-            background: rgba(10, 17, 40, 0.9);
-            border: 1px solid var(--prata);
-            border-radius: 20px;
-            padding: 30px 20px;
-            width: 90%; max-width: 350px;
-            text-align: center;
+            background: rgba(10, 17, 40, 0.9); border: 1px solid var(--prata); border-radius: 20px; padding: 30px 20px;
+            width: 90%; max-width: 350px; text-align: center;
             box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(244, 172, 183, 0.1);
-            transform: translateY(50px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(50px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .modal-overlay.active .modal-box {
-            transform: translateY(0);
-        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
 
-        .modal-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem;
-            color: var(--rosa);
-            margin-bottom: 10px;
-        }
-        
-        .modal-desc {
-            font-size: 0.9rem;
-            color: var(--prata-brilho);
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
+        .modal-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--rosa); margin-bottom: 10px; }
+        .modal-desc { font-size: 0.9rem; color: var(--prata-brilho); margin-bottom: 25px; line-height: 1.5; }
 
         .modal-input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--prata-metal);
-            border-radius: 10px;
-            color: var(--prata-brilho);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 25px;
-            outline: none;
-            transition: border-color 0.3s ease;
+            width: 100%; padding: 12px 15px; background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--prata-metal); border-radius: 10px; color: var(--prata-brilho);
+            font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center;
+            margin-bottom: 25px; outline: none; transition: border-color 0.3s ease;
         }
         .modal-input::placeholder { color: rgba(224, 224, 224, 0.5); }
         .modal-input:focus { border-color: var(--rosa); box-shadow: 0 0 10px rgba(244, 172, 183, 0.3); }
 
-        .modal-buttons {
-            display: flex; gap: 10px; justify-content: center;
-        }
+        .modal-buttons { display: flex; gap: 10px; justify-content: center; }
         
         .btn-modal {
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            flex: 1;
-            transition: all 0.3s ease;
-            border: 1px solid var(--prata);
+            padding: 12px 20px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px; cursor: pointer; flex: 1; transition: all 0.3s ease; border: 1px solid var(--prata);
         }
         
-        .btn-cancelar {
-            background: transparent;
-            color: var(--prata-brilho);
-        }
+        .btn-cancelar { background: transparent; color: var(--prata-brilho); }
         .btn-cancelar:hover { background: rgba(255, 255, 255, 0.1); }
-        
-        .btn-enviar {
-            background: linear-gradient(135deg, var(--prata-brilho) 0%, var(--prata-metal) 100%);
-            color: var(--azul-escuro);
-            border: none;
-        }
+        .btn-enviar { background: linear-gradient(135deg, var(--prata-brilho) 0%, var(--prata-metal) 100%); color: var(--azul-escuro); border: none; }
         .btn-enviar:hover { background: var(--rosa); box-shadow: 0 0 15px rgba(244, 172, 183, 0.5); }
-
     </style>
 </head>
 <body>
@@ -351,7 +331,85 @@
             </div>
         </div>
 
+        <!-- Fundo Azul Elegante -->
         <div class="bg-debutante"></div>
+        
+        <!-- FLORES SENDO DESENHADAS -->
+        <div class="floral-background" id="floralBackground">
+            <!-- Flores Topo Esquerda -->
+            <svg class="floral-corner top-left" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="var(--rosa)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Ramos -->
+                    <path class="draw-path" d="M0,0 C100,20 150,80 180,180" />
+                    <path class="draw-path" d="M0,50 C80,60 120,120 130,220" />
+                    <path class="draw-path" d="M50,0 C60,80 120,120 220,130" />
+                    <!-- Folhas do Ramo 1 -->
+                    <path class="draw-path" d="M60,20 C80,10 100,20 90,40 C70,40 60,30 60,20 Z" />
+                    <path class="draw-path" d="M120,50 C140,40 160,50 150,70 C130,70 120,60 120,50 Z" />
+                    <!-- Folhas do Ramo 2 -->
+                    <path class="draw-path" d="M50,70 C70,60 90,70 80,90 C60,90 50,80 50,70 Z" />
+                    <path class="draw-path" d="M90,120 C110,110 130,120 120,140 C100,140 90,130 90,120 Z" />
+                    <!-- Folhas do Ramo 3 -->
+                    <path class="draw-path" d="M70,50 C60,70 70,90 90,80 C90,60 80,50 70,50 Z" />
+                    <path class="draw-path" d="M120,90 C110,110 120,130 140,120 C140,100 130,90 120,90 Z" />
+                    <path class="draw-path" d="M170,110 C160,130 170,150 190,140 C190,120 180,110 170,110 Z" />
+                    
+                    <!-- Rosas -->
+                    <g class="rose">
+                        <path class="draw-path" d="M180,180 C160,170 150,200 180,210 C210,200 200,170 180,180 Z" />
+                        <path class="draw-path" d="M170,185 C160,175 175,170 180,185 C185,170 200,175 190,185" />
+                        <path class="draw-path" d="M175,192 C170,198 190,198 185,192" />
+                    </g>
+                    <g class="rose">
+                        <path class="draw-path" d="M130,220 C110,210 100,240 130,250 C160,240 150,210 130,220 Z" />
+                        <path class="draw-path" d="M120,225 C110,215 125,210 130,225 C135,210 150,215 140,225" />
+                        <path class="draw-path" d="M125,232 C120,238 140,238 135,232" />
+                    </g>
+                    <g class="rose">
+                        <path class="draw-path" d="M220,130 C200,120 190,150 220,160 C250,150 240,120 220,130 Z" />
+                        <path class="draw-path" d="M210,135 C200,125 215,120 220,135 C225,120 240,125 230,135" />
+                        <path class="draw-path" d="M215,142 C210,148 230,148 225,142" />
+                    </g>
+                </g>
+            </svg>
+
+            <!-- Flores Base Direita -->
+            <svg class="floral-corner bottom-right" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <g stroke="var(--rosa)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Ramos -->
+                    <path class="draw-path" d="M300,300 C200,280 150,220 120,120" />
+                    <path class="draw-path" d="M300,250 C220,240 180,180 170,80" />
+                    <path class="draw-path" d="M250,300 C240,220 180,180 80,170" />
+                    <!-- Folhas do Ramo 1 -->
+                    <path class="draw-path" d="M240,280 C220,290 200,280 210,260 C230,260 240,270 240,280 Z" />
+                    <path class="draw-path" d="M180,250 C160,260 140,250 150,230 C170,230 180,240 180,250 Z" />
+                    <path class="draw-path" d="M150,190 C130,200 110,190 120,170 C140,170 150,180 150,190 Z" />
+                    <!-- Folhas do Ramo 2 -->
+                    <path class="draw-path" d="M250,230 C230,240 210,230 220,210 C240,210 250,220 250,230 Z" />
+                    <path class="draw-path" d="M210,180 C190,190 170,180 180,160 C200,160 210,170 210,180 Z" />
+                    <!-- Folhas do Ramo 3 -->
+                    <path class="draw-path" d="M230,250 C240,230 230,210 210,220 C210,240 220,250 230,250 Z" />
+                    <path class="draw-path" d="M180,210 C190,190 180,170 160,180 C160,200 170,210 180,210 Z" />
+                    
+                    <!-- Rosas -->
+                    <g class="rose">
+                        <path class="draw-path" d="M120,120 C140,130 150,100 120,90 C90,100 100,130 120,120 Z" />
+                        <path class="draw-path" d="M130,115 C140,125 125,130 120,115 C115,130 100,125 110,115" />
+                        <path class="draw-path" d="M125,108 C130,102 110,102 115,108" />
+                    </g>
+                    <g class="rose">
+                        <path class="draw-path" d="M170,80 C190,90 200,60 170,50 C140,60 150,90 170,80 Z" />
+                        <path class="draw-path" d="M180,75 C190,85 175,90 170,75 C165,90 150,85 160,75" />
+                        <path class="draw-path" d="M175,68 C180,62 160,62 165,68" />
+                    </g>
+                    <g class="rose">
+                        <path class="draw-path" d="M80,170 C100,180 110,150 80,140 C50,150 60,180 80,170 Z" />
+                        <path class="draw-path" d="M90,165 C100,175 85,180 80,165 C75,180 60,175 70,165" />
+                        <path class="draw-path" d="M85,158 C90,152 70,152 75,158" />
+                    </g>
+                </g>
+            </svg>
+        </div>
         
         <div class="content" id="scrollArea">
             <div class="inner-content" id="conteudoInterno">
@@ -435,6 +493,9 @@
             const cover = document.getElementById('coverScreen');
             const musica = document.getElementById('musicaFundo');
             const conteudo = document.getElementById('conteudoInterno');
+            
+            // Adiciona a classe que inicia o desenho das flores mágicas no fundo
+            document.getElementById('floralBackground').classList.add('start-drawing');
             
             cover.classList.add('open');
             conteudo.classList.add('show');
