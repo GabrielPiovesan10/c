@@ -14,14 +14,11 @@
     <meta property="og:title" content="Convite Especial: 15 Anos - Ana Julia ✨">
     <meta property="og:description" content="Venha celebrar o capítulo mais mágico da minha vida. Clique para abrir o convite!">
     
-    <!-- AQUI FICA A IMAGEM QUE APARECE NO WHATSAPP (DIFERENTE DA DO FUNDO) -->
     <meta property="og:image" content="foto_whatsapp.JPG">
-    
     <meta property="og:type" content="website">
     <meta property="og:locale" content="pt_BR">
     <!-- ========================================== -->
 
-    <!-- Fontes do Google -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -39,29 +36,19 @@
         body {
             background-color: #000;
             font-family: 'Montserrat', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; 
-            height: 100dvh; 
-            margin: 0; 
-            color: var(--prata);
-            overflow: hidden; 
+            display: flex; justify-content: center; align-items: flex-start; 
+            height: 100dvh; margin: 0; color: var(--prata); overflow: hidden; 
         }
         
         .mobile-container {
-            width: 100%;
-            max-width: 420px;
-            height: 100dvh; 
-            background-color: var(--azul-fundo);
-            position: relative;
-            overflow: hidden;
+            width: 100%; max-width: 420px; height: 100dvh; 
+            background-color: var(--azul-fundo); position: relative; overflow: hidden;
             box-shadow: 0 0 30px rgba(0,0,0,0.8);
         }
 
         /* ================= TELA 1: CAPA ================= */
         .cover {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             z-index: 30; pointer-events: auto;
         }
@@ -69,19 +56,14 @@
         .cover::before, .cover::after {
             content: ''; position: absolute; top: 0; width: 50%; height: 100%;
             background: linear-gradient(135deg, var(--azul-escuro) 0%, #070c1d 100%);
-            z-index: 1;
-            transition: transform 1.2s cubic-bezier(0.64, 0.05, 0.08, 1) 0.4s;
+            z-index: 1; transition: transform 1.2s cubic-bezier(0.64, 0.05, 0.08, 1) 0.4s;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
         }
         .cover::before { left: 0; border-right: 2px solid var(--prata-brilho); } 
         .cover::after { right: 0; border-left: 2px solid var(--prata-brilho); }
 
         .cover-content {
-            position: relative; 
-            z-index: 2; 
-            text-align: center; 
-            padding: 50px 20px;
-            width: 100%;
+            position: relative; z-index: 2; text-align: center; padding: 50px 20px; width: 100%;
             background: radial-gradient(circle, rgba(7, 12, 29, 1) 25%, transparent 70%);
             transition: opacity 0.4s ease, transform 0.4s ease;
         }
@@ -91,22 +73,9 @@
         .cover.open::after { transform: translateX(100%); }
         .cover.open { pointer-events: none; transition: visibility 0s linear 2s; visibility: hidden; }
 
-        .title-cursive {
-            font-family: 'Great Vibes', cursive; font-size: 4.5rem;
-            color: var(--prata-brilho); 
-            margin-bottom: 5px; text-shadow: 0 0 15px rgba(244, 172, 183, 0.5); 
-        }
-        
-        .subtitle {
-            font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase;
-            color: var(--rosa); margin-bottom: 50px; font-weight: 300;
-        }
-        
-        #contador-idade {
-            font-weight: 700;
-            color: var(--prata-brilho);
-            font-size: 1.5rem;
-        }
+        .title-cursive { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: var(--prata-brilho); margin-bottom: 5px; text-shadow: 0 0 15px rgba(244, 172, 183, 0.5); }
+        .subtitle { font-size: 1.3rem; letter-spacing: 4px; text-transform: uppercase; color: var(--rosa); margin-bottom: 50px; font-weight: 300; }
+        #contador-idade { font-weight: 700; color: var(--prata-brilho); font-size: 1.5rem; }
 
         .btn-open {
             background: linear-gradient(135deg, var(--prata-brilho) 0%, var(--prata-metal) 100%);
@@ -121,106 +90,67 @@
             100% { transform: scale(1); box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); }
         }
 
-        /* ================= TELA 2: FUNDO AZUL ELEGANTE ================= */
+        /* ================= TELA 2: FUNDO AZUL ================= */
         .bg-debutante {
-            position: absolute; 
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, #15274d 0%, var(--azul-escuro) 100%);
             z-index: 1;
         }
         .bg-debutante::after {
-            content: '';
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(7, 12, 29, 0.2) 0%, rgba(7, 12, 29, 0.8) 100%);
         }
 
-        /* ================= TELA 2: FLORES (APENAS NA BASE) ================= */
-        .floral-background {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2; 
-            pointer-events: none;
-            overflow: hidden;
-        }
-        
-        .floral-corner {
-            position: absolute;
-            width: 250px;
-            height: 250px;
-            opacity: 0.9;
-            filter: drop-shadow(0 0 6px rgba(244, 172, 183, 0.5));
-            bottom: -10px; /* Gruda na base do celular */
-        }
-        
-        /* Apenas nos cantos inferiores para não encostar no nome */
-        .floral-corner.bottom-left { left: -10px; }
-        .floral-corner.bottom-right { right: -10px; transform: scaleX(-1); /* Espelha perfeitamente para o lado direito */ }
-
-        /* A animação 100% fluida */
+        /* ================= ANIMAÇÃO FLUIDA ================= */
         .draw-path {
             stroke-dasharray: 1;
             stroke-dashoffset: 1;
-            opacity: 0; /* Começa invisível */
+            opacity: 0;
         }
-
         @keyframes drawFluid {
             0% { stroke-dashoffset: 1; opacity: 0; }
             5% { opacity: 1; }
             100% { stroke-dashoffset: 0; opacity: 1; }
         }
-
-        /* Lógica de tempos para um desenho natural (ramos > folhas > miolo > pétalas) */
-        .floral-background.start-drawing .vine { animation: drawFluid 2s ease-out forwards; animation-delay: 0.5s; }
-        .floral-background.start-drawing .leaf { animation: drawFluid 1.5s ease-out forwards; animation-delay: 1.5s; }
         
-        /* Efeito desabrochar (pétalas aparecem uma a uma) */
-        .floral-background.start-drawing .petal { animation: drawFluid 1.2s ease-out forwards; }
-        .floral-background.start-drawing .petal.p1 { animation-delay: 2.2s; }
-        .floral-background.start-drawing .petal.p2 { animation-delay: 2.4s; }
-        .floral-background.start-drawing .petal.p3 { animation-delay: 2.6s; }
-        .floral-background.start-drawing .petal.p4 { animation-delay: 2.8s; }
-        .floral-background.start-drawing .petal.p5 { animation-delay: 3.0s; }
-        .floral-background.start-drawing .petal.p6 { animation-delay: 3.2s; }
+        svg.start-drawing .vine { animation: drawFluid 3.5s ease-out forwards; animation-delay: 0.5s; }
+        svg.start-drawing .leaf { animation: drawFluid 2s ease-out forwards; animation-delay: 1.5s; }
+        svg.start-drawing .petal { animation: drawFluid 1.2s ease-out forwards; }
+        svg.start-drawing .petal.p1 { animation-delay: 2.2s; }
+        svg.start-drawing .petal.p2 { animation-delay: 2.4s; }
+        svg.start-drawing .petal.p3 { animation-delay: 2.6s; }
+        svg.start-drawing .petal.p4 { animation-delay: 2.8s; }
+        svg.start-drawing .petal.p5 { animation-delay: 3.0s; }
+        svg.start-drawing .petal.p6 { animation-delay: 3.2s; }
 
-        /* Toque de mestre: As pétalas ganham um preenchimento rosa translúcido no final */
         .petal {
             fill: rgba(244, 172, 183, 0);
             transition: fill 2s ease;
         }
-        .floral-background.start-drawing .petal {
-            fill: rgba(244, 172, 183, 0.15); /* Pinta suavemente a flor */
-            transition-delay: 4.5s; /* Só pinta depois de terminar de desenhar */
+        svg.start-drawing .petal {
+            fill: rgba(244, 172, 183, 0.15); /* Pinta suavemente no final */
+            transition-delay: 4.5s; 
         }
 
         /* ================= TELA 2: TEXTOS QUE ROLAM ================= */
         .content {
-            position: relative; 
-            z-index: 10; 
-            height: 100%;
-            overflow-y: auto; 
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 50px; 
+            position: relative; z-index: 10; height: 100%;
+            overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: 50px; 
         }
-
-        .inner-content { padding: 40px 20px; text-align: center; }
+        .inner-content { padding: 40px 20px; text-align: center; position: relative; }
 
         .fade-up { opacity: 0; transform: translateY(30px); }
         .inner-content.show .fade-up { animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        
         @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
-        .delay-1 { animation-delay: 1.0s; } 
-        .delay-2 { animation-delay: 1.2s; } 
-        .delay-3 { animation-delay: 1.4s; } 
-        .delay-4 { animation-delay: 1.6s; } 
+        .delay-1 { animation-delay: 1.0s; } .delay-2 { animation-delay: 1.2s; } 
+        .delay-3 { animation-delay: 1.4s; } .delay-4 { animation-delay: 1.6s; } 
         .delay-5 { animation-delay: 1.8s; }
 
         .header-text { margin-top: 100px; } 
         .header-text h1 { 
-            font-family: 'Great Vibes', cursive; font-size: 4rem; 
-            color: var(--prata-brilho); 
-            text-shadow: 2px 2px 15px rgba(0,0,0,1); /* Sombra forte para garantir leitura perfeita */
+            font-family: 'Great Vibes', cursive; font-size: 4.3rem; 
+            color: var(--prata-brilho); text-shadow: 2px 2px 15px rgba(0,0,0,1); 
         }
-        
         .ornament { color: var(--rosa); font-size: 1.5rem; margin: 5px 0; font-weight: 100; letter-spacing: 5px; }
 
         .texto-emocao {
@@ -228,11 +158,7 @@
             border-left: 3px solid var(--rosa); border-right: 3px solid var(--rosa);
             border-radius: 10px; backdrop-filter: blur(4px); box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
-        
-        .texto-emocao p {
-            font-size: 0.95rem; line-height: 1.6; color: var(--prata-brilho);
-            font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,1);
-        }
+        .texto-emocao p { font-size: 0.95rem; line-height: 1.6; color: var(--prata-brilho); font-style: italic; text-shadow: 1px 1px 3px rgba(0,0,0,1); }
 
         .details { margin-top: 30px; background: rgba(0,0,0,0.4); padding: 20px; border-radius: 15px; border: 1px solid rgba(224, 224, 224, 0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(4px); }
         .details p { font-size: 1rem; line-height: 1.6; margin-bottom: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
@@ -243,76 +169,36 @@
             margin: 30px 0; padding: 20px 10px; background: rgba(255, 255, 255, 0.08); border-radius: 15px;
             border: 1px solid var(--prata-metal); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); 
         }
-        
         .countdown-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; color: var(--prata-brilho); margin-bottom: 15px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
-
         .countdown { display: flex; justify-content: center; gap: 10px; }
-        .time-box {
-            background: rgba(0, 0, 0, 0.6); border: 1px solid var(--rosa); border-radius: 8px;
-            width: 70px; padding: 12px 5px; text-align: center;
-        }
+        .time-box { background: rgba(0, 0, 0, 0.6); border: 1px solid var(--rosa); border-radius: 8px; width: 70px; padding: 12px 5px; text-align: center; }
         .time-box span { display: block; font-size: 1.8rem; font-weight: 600; color: var(--prata-brilho); font-family: 'Montserrat', sans-serif; }
         .time-box small { font-size: 0.7rem; color: var(--rosa); text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; display: block;}
 
         .buttons-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px; }
-        
         .btn {
             background: rgba(0, 0, 0, 0.6); border: 1px solid var(--prata); color: var(--prata-brilho);
-            padding: 15px 30px; font-size: 0.9rem; font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase; letter-spacing: 2px; border-radius: 30px; cursor: pointer;
-            transition: all 0.3s ease; text-decoration: none; display: inline-block; width: 90%;
-            backdrop-filter: blur(5px); text-align: center;
+            padding: 15px 30px; font-size: 0.9rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px; border-radius: 30px; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none; display: inline-block; width: 90%; backdrop-filter: blur(5px); text-align: center;
         }
         .btn:hover { background: var(--rosa); color: var(--azul-escuro); border-color: var(--rosa); box-shadow: 0 0 15px rgba(244, 172, 183, 0.5); }
         .rsvp-text { font-size: 0.8rem; color: var(--prata-brilho); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);}
 
-        /* ================= PARTÍCULAS ================= */
-        .sparkle {
-            position: absolute; border-radius: 50%; opacity: 0;
-            z-index: 5; animation: floatUp linear infinite; pointer-events: none;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(100px) scale(0.5); opacity: 0; }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.5; }
-            100% { transform: translateY(-800px) scale(1.2); opacity: 0; }
-        }
+        .sparkle { position: absolute; border-radius: 50%; opacity: 0; z-index: 5; animation: floatUp linear infinite; pointer-events: none; }
+        @keyframes floatUp { 0% { transform: translateY(100px) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.5; } 100% { transform: translateY(-800px) scale(1.2); opacity: 0; } }
 
-        /* ================= MODAL DE CONFIRMAÇÃO ================= */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 50;
-            display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-        }
+        /* ================= MODAL ================= */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 50; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-
-        .modal-box {
-            background: rgba(10, 17, 40, 0.9); border: 1px solid var(--prata); border-radius: 20px; padding: 30px 20px;
-            width: 90%; max-width: 350px; text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(244, 172, 183, 0.1);
-            transform: translateY(50px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .modal-box { background: rgba(10, 17, 40, 0.9); border: 1px solid var(--prata); border-radius: 20px; padding: 30px 20px; width: 90%; max-width: 350px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(244, 172, 183, 0.1); transform: translateY(50px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .modal-overlay.active .modal-box { transform: translateY(0); }
-
         .modal-title { font-family: 'Great Vibes', cursive; font-size: 2.5rem; color: var(--rosa); margin-bottom: 10px; }
         .modal-desc { font-size: 0.9rem; color: var(--prata-brilho); margin-bottom: 25px; line-height: 1.5; }
-
-        .modal-input {
-            width: 100%; padding: 12px 15px; background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--prata-metal); border-radius: 10px; color: var(--prata-brilho);
-            font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center;
-            margin-bottom: 25px; outline: none; transition: border-color 0.3s ease;
-        }
+        .modal-input { width: 100%; padding: 12px 15px; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--prata-metal); border-radius: 10px; color: var(--prata-brilho); font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center; margin-bottom: 25px; outline: none; transition: border-color 0.3s ease; }
         .modal-input::placeholder { color: rgba(224, 224, 224, 0.5); }
         .modal-input:focus { border-color: var(--rosa); box-shadow: 0 0 10px rgba(244, 172, 183, 0.3); }
-
         .modal-buttons { display: flex; gap: 10px; justify-content: center; }
-        
-        .btn-modal {
-            padding: 12px 20px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 1px; cursor: pointer; flex: 1; transition: all 0.3s ease; border: 1px solid var(--prata);
-        }
-        
+        .btn-modal { padding: 12px 20px; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; flex: 1; transition: all 0.3s ease; border: 1px solid var(--prata); }
         .btn-cancelar { background: transparent; color: var(--prata-brilho); }
         .btn-cancelar:hover { background: rgba(255, 255, 255, 0.1); }
         .btn-enviar { background: linear-gradient(135deg, var(--prata-brilho) 0%, var(--prata-metal) 100%); color: var(--azul-escuro); border: none; }
@@ -327,7 +213,6 @@
 
     <div class="mobile-container">
         
-        <!-- Capa do Convite -->
         <div class="cover" id="coverScreen">
             <div class="cover-content">
                 <h1 class="title-cursive">Ana Julia</h1>
@@ -337,151 +222,136 @@
             </div>
         </div>
 
-        <!-- Fundo Azul Elegante -->
         <div class="bg-debutante"></div>
         
-        <!-- FLORES SENDO DESENHADAS (SOMENTE NA BASE) -->
-        <div class="floral-background" id="floralBackground">
-            
-            <!-- Canto Inferior Esquerdo -->
-            <svg class="floral-corner bottom-left" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient id="roseGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#f4acb7" />
-                        <stop offset="100%" stop-color="#ffffff" />
-                    </linearGradient>
-                </defs>
-                <g stroke="url(#roseGradient)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    
-                    <!-- Ramos Fluídos Perfeitos -->
-                    <path class="draw-path vine" pathLength="1" d="M -10,210 Q 30,160 60,140 T 130,50" />
-                    <path class="draw-path vine" pathLength="1" d="M 20,220 Q 80,190 140,160 T 190,100" />
-                    
-                    <!-- Folhas Geométricas Perfeitas (Amendoadas) -->
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(30, 170) rotate(-45)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(45, 185) rotate(15)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(90, 100) rotate(-60)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(100, 115) rotate(30)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(165, 130) rotate(-30)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(110, 175) rotate(-15)" />
-
-                    <!-- FLOR PRINCIPAL 1 (Geometria perfeita de 5 pétalas) -->
-                    <g transform="translate(60, 140)">
-                        <circle class="draw-path petal p1" pathLength="1" cx="0" cy="0" r="4" />
-                        <path class="draw-path petal p2" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" />
-                        <path class="draw-path petal p3" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(72)" />
-                        <path class="draw-path petal p4" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(144)" />
-                        <path class="draw-path petal p5" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(216)" />
-                        <path class="draw-path petal p6" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(288)" />
-                    </g>
-
-                    <!-- FLOR 2 (Menor) -->
-                    <g transform="translate(140, 160) scale(0.7)">
-                        <circle class="draw-path petal p1" pathLength="1" cx="0" cy="0" r="4" />
-                        <path class="draw-path petal p2" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" />
-                        <path class="draw-path petal p3" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(72)" />
-                        <path class="draw-path petal p4" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(144)" />
-                        <path class="draw-path petal p5" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(216)" />
-                        <path class="draw-path petal p6" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(288)" />
-                    </g>
-
-                    <!-- FLOR 3 (Botão na ponta) -->
-                    <g transform="translate(130, 50) scale(0.6) rotate(45)">
-                        <path class="draw-path petal p2" pathLength="1" d="M 0,0 C -15,-20 -5,-35 0,-40 C 5,-35 15,-20 0,0 Z" />
-                        <path class="draw-path leaf" pathLength="1" d="M 0,0 C -15,0 -20,10 -10,15 C -5,10 -5,0 0,0 Z" />
-                        <path class="draw-path leaf" pathLength="1" d="M 0,0 C 15,0 20,10 10,15 C 5,10 5,0 0,0 Z" />
-                    </g>
-                </g>
-            </svg>
-
-            <!-- Canto Inferior Direito (Espelhado pelo CSS) -->
-            <svg class="floral-corner bottom-right" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <g stroke="url(#roseGradient)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path class="draw-path vine" pathLength="1" d="M -10,210 Q 30,160 60,140 T 130,50" />
-                    <path class="draw-path vine" pathLength="1" d="M 20,220 Q 80,190 140,160 T 190,100" />
-                    
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(30, 170) rotate(-45)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(45, 185) rotate(15)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(90, 100) rotate(-60)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(100, 115) rotate(30)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(165, 130) rotate(-30)" />
-                    <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" transform="translate(110, 175) rotate(-15)" />
-
-                    <g transform="translate(60, 140)">
-                        <circle class="draw-path petal p1" pathLength="1" cx="0" cy="0" r="4" />
-                        <path class="draw-path petal p2" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" />
-                        <path class="draw-path petal p3" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(72)" />
-                        <path class="draw-path petal p4" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(144)" />
-                        <path class="draw-path petal p5" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(216)" />
-                        <path class="draw-path petal p6" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(288)" />
-                    </g>
-
-                    <g transform="translate(140, 160) scale(0.7)">
-                        <circle class="draw-path petal p1" pathLength="1" cx="0" cy="0" r="4" />
-                        <path class="draw-path petal p2" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" />
-                        <path class="draw-path petal p3" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(72)" />
-                        <path class="draw-path petal p4" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(144)" />
-                        <path class="draw-path petal p5" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(216)" />
-                        <path class="draw-path petal p6" pathLength="1" d="M 0,-4 C -15,-18 -20,-35 0,-40 C 20,-35 15,-18 0,-4 Z" transform="rotate(288)" />
-                    </g>
-
-                    <g transform="translate(130, 50) scale(0.6) rotate(45)">
-                        <path class="draw-path petal p2" pathLength="1" d="M 0,0 C -15,-20 -5,-35 0,-40 C 5,-35 15,-20 0,0 Z" />
-                        <path class="draw-path leaf" pathLength="1" d="M 0,0 C -15,0 -20,10 -10,15 C -5,10 -5,0 0,0 Z" />
-                        <path class="draw-path leaf" pathLength="1" d="M 0,0 C 15,0 20,10 10,15 C 5,10 5,0 0,0 Z" />
-                    </g>
-                </g>
-            </svg>
-        </div>
-        
+        <!-- O Segredo: a Inner-Content engloba tudo. As flores desenham contornando o texto e sobem quando você faz scroll! -->
         <div class="content" id="scrollArea">
             <div class="inner-content" id="conteudoInterno">
                 
-                <!-- O nome Ana Julia agora tem um palco só dele, limpo e com muito destaque -->
-                <div class="header-text fade-up delay-1">
-                    <h1>Ana Julia</h1>
-                    <div class="ornament">✦ ✧ ✦</div>
-                </div>
+                <!-- SVG Mágico em Tela Cheia -->
+                <svg id="floralBackground" viewBox="0 0 400 1000" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 100%; opacity: 0.95; filter: drop-shadow(0 0 6px rgba(244, 172, 183, 0.5)); z-index: 0; pointer-events: none;" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="roseGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#f4acb7" />
+                            <stop offset="100%" stop-color="#ffffff" />
+                        </linearGradient>
+                        
+                        <!-- Flor Completa Base -->
+                        <g id="flower-main">
+                            <circle class="draw-path petal p1" pathLength="1" cx="0" cy="0" r="4.5" />
+                            <path class="draw-path petal p2" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" />
+                            <path class="draw-path petal p3" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" transform="rotate(72)" />
+                            <path class="draw-path petal p4" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" transform="rotate(144)" />
+                            <path class="draw-path petal p5" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" transform="rotate(216)" />
+                            <path class="draw-path petal p6" pathLength="1" d="M 0,-4.5 C -18,-20 -22,-40 0,-45 C 22,-40 18,-20 0,-4.5 Z" transform="rotate(288)" />
+                        </g>
 
-                <div class="texto-emocao fade-up delay-2">
-                    <p>"Completar 15 anos é o início de uma nova e linda fase, um momento mágico onde os sonhos começam a ganhar asas. Ter pessoas tão especiais como vocês ao meu lado para compartilhar esse dia torna tudo ainda mais inesquecível e perfeito."</p>
-                </div>
+                        <!-- Botão de Rosa -->
+                        <g id="flower-bud">
+                            <path class="draw-path petal p2" pathLength="1" d="M 0,0 C -15,-20 -5,-35 0,-40 C 5,-35 15,-20 0,0 Z" />
+                            <path class="draw-path leaf" pathLength="1" d="M 0,0 C -15,0 -20,10 -10,15 C -5,10 -5,0 0,0 Z" />
+                            <path class="draw-path leaf" pathLength="1" d="M 0,0 C 15,0 20,10 10,15 C 5,10 5,0 0,0 Z" />
+                        </g>
+                        
+                        <!-- Folhinha Unitária -->
+                        <g id="single-leaf">
+                            <path class="draw-path leaf" pathLength="1" d="M 0,0 Q 12,-8 25,0 Q 12,8 0,0 Z" />
+                        </g>
+                    </defs>
 
-                <div class="details fade-up delay-3">
-                    <p><span class="highlight">DATA</span><br>16 de Outubro</p>
-                    <p><span class="highlight">HORÁRIO DE CHEGADA</span><br>Às 19:30</p>
-                    <p><span class="highlight">LOCAL</span><br>Raliflores, Cascalho</p>
-                </div>
+                    <g stroke="url(#roseGradient)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        
+                        <!-- ================= RAMO ESQUERDO ================= -->
+                        <!-- Sobe contornando o nome Ana Julia com um arco majestoso (C 40, 140 70, 140 60, 90) -->
+                        <path class="draw-path vine" pathLength="1" d="M -10, 1050 C 20, 800 20, 600 15, 400 C 10, 300 0, 220 20, 180 C 40, 140 70, 140 60, 90 C 50, 40 10, 50 0, 0" />
+                        
+                        <!-- Flores Esquerdas -->
+                        <g transform="translate(15, 850) scale(0.9) rotate(15)"> <use href="#flower-main" /> </g>
+                        <g transform="translate(20, 650) scale(0.7) rotate(30)"> <use href="#flower-bud" /> </g>
+                        <g transform="translate(15, 480) scale(0.8) rotate(-20)"> <use href="#flower-main" /> </g>
+                        <g transform="translate(25, 270) scale(0.6) rotate(60)"> <use href="#flower-bud" /> </g>
+                        <g transform="translate(55, 140) scale(0.85) rotate(10)"> <use href="#flower-main" /> </g> <!-- Essa moldura exatamente o nome Ana Julia -->
+                        <g transform="translate(25, 50) scale(0.7) rotate(-45)"> <use href="#flower-bud" /> </g>
 
-                <div class="countdown-wrapper fade-up delay-4">
-                    <div class="countdown-title">Contagem Regressiva</div>
-                    <div class="countdown">
-                        <div class="time-box"><span id="dias">00</span><small>Dias</small></div>
-                        <div class="time-box"><span id="horas">00</span><small>Horas</small></div>
-                        <div class="time-box"><span id="minutos">00</span><small>Min</small></div>
-                        <div class="time-box"><span id="segundos">00</span><small>Seg</small></div>
+                        <!-- Folhas Esquerdas -->
+                        <g transform="translate(10, 900) rotate(-45)"><use href="#single-leaf"/></g>
+                        <g transform="translate(20, 750) rotate(-10)"><use href="#single-leaf"/></g>
+                        <g transform="translate(18, 550) rotate(-60)"><use href="#single-leaf"/></g>
+                        <g transform="translate(15, 380) rotate(-20)"><use href="#single-leaf"/></g>
+                        <g transform="translate(12, 220) rotate(-70)"><use href="#single-leaf"/></g>
+                        <g transform="translate(35, 180) rotate(-15)"><use href="#single-leaf"/></g>
+                        <g transform="translate(40, 90) rotate(-45)"><use href="#single-leaf"/></g>
+
+
+                        <!-- ================= RAMO DIREITO ================= -->
+                        <path class="draw-path vine" pathLength="1" d="M 410, 1050 C 380, 800 380, 600 385, 400 C 390, 300 400, 220 380, 180 C 360, 140 330, 140 340, 90 C 350, 40 390, 50 400, 0" />
+                        
+                        <!-- Flores Direitas -->
+                        <g transform="translate(385, 850) scale(0.9) rotate(-15)"> <use href="#flower-main" /> </g>
+                        <g transform="translate(380, 650) scale(0.7) rotate(-30)"> <use href="#flower-bud" /> </g>
+                        <g transform="translate(385, 480) scale(0.8) rotate(20)"> <use href="#flower-main" /> </g>
+                        <g transform="translate(375, 270) scale(0.6) rotate(-60)"> <use href="#flower-bud" /> </g>
+                        <g transform="translate(345, 140) scale(0.85) rotate(-10)"> <use href="#flower-main" /> </g> <!-- Essa moldura do lado direito do nome Ana Julia -->
+                        <g transform="translate(375, 50) scale(0.7) rotate(45)"> <use href="#flower-bud" /> </g>
+
+                        <!-- Folhas Direitas -->
+                        <g transform="translate(390, 900) rotate(225)"><use href="#single-leaf"/></g>
+                        <g transform="translate(380, 750) rotate(190)"><use href="#single-leaf"/></g>
+                        <g transform="translate(382, 550) rotate(240)"><use href="#single-leaf"/></g>
+                        <g transform="translate(385, 380) rotate(200)"><use href="#single-leaf"/></g>
+                        <g transform="translate(388, 220) rotate(250)"><use href="#single-leaf"/></g>
+                        <g transform="translate(365, 180) rotate(195)"><use href="#single-leaf"/></g>
+                        <g transform="translate(360, 90) rotate(225)"><use href="#single-leaf"/></g>
+                    </g>
+                </svg>
+
+                <!-- Todos os textos estão protegidos com z-index para brilharem por cima do fundo -->
+                <div style="position: relative; z-index: 2;">
+                    
+                    <div class="header-text fade-up delay-1">
+                        <h1>Ana Julia</h1>
+                        <div class="ornament">✦ ✧ ✦</div>
                     </div>
-                </div>
 
-                <!-- Botões -->
-                <div class="buttons-container fade-up delay-5">
-                    <p class="rsvp-text">Confirme sua presença até 20/09</p>
-                    <button class="btn" onclick="abrirModal()">Confirmar Presença</button>
-                    <a href="https://maps.google.com/?q=Raliflores,+Cascalho,+Cordeirópolis" target="_blank" class="btn">
-                        Localização (Maps)
-                    </a>
-                </div>
+                    <div class="texto-emocao fade-up delay-2">
+                        <p>"Completar 15 anos é o início de uma nova e linda fase, um momento mágico onde os sonhos começam a ganhar asas. Ter pessoas tão especiais como vocês ao meu lado para compartilhar esse dia torna tudo ainda mais inesquecível e perfeito."</p>
+                    </div>
+
+                    <div class="details fade-up delay-3">
+                        <p><span class="highlight">DATA</span><br>16 de Outubro</p>
+                        <p><span class="highlight">HORÁRIO DE CHEGADA</span><br>Às 19:30</p>
+                        <p><span class="highlight">LOCAL</span><br>Raliflores, Cascalho</p>
+                    </div>
+
+                    <div class="countdown-wrapper fade-up delay-4">
+                        <div class="countdown-title">Contagem Regressiva</div>
+                        <div class="countdown">
+                            <div class="time-box"><span id="dias">00</span><small>Dias</small></div>
+                            <div class="time-box"><span id="horas">00</span><small>Horas</small></div>
+                            <div class="time-box"><span id="minutos">00</span><small>Min</small></div>
+                            <div class="time-box"><span id="segundos">00</span><small>Seg</small></div>
+                        </div>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="buttons-container fade-up delay-5">
+                        <p class="rsvp-text">Confirme sua presença até 20/09</p>
+                        <button class="btn" onclick="abrirModal()">Confirmar Presença</button>
+                        <a href="https://maps.google.com/?q=Raliflores,+Cascalho,+Cordeirópolis" target="_blank" class="btn">
+                            Localização (Maps)
+                        </a>
+                    </div>
+
+                </div> <!-- Fim z-index -->
             </div>
         </div>
         
-        <!-- ================= MODAL DE CONFIRMAÇÃO ================= -->
+        <!-- ================= MODAL ================= -->
         <div class="modal-overlay" id="modalPresenca">
             <div class="modal-box">
                 <h2 class="modal-title">Sua Presença</h2>
                 <p class="modal-desc">Por favor, digite seu nome e sobrenome para confirmarmos sua presença.</p>
-                
                 <input type="text" id="nomeConvidado" class="modal-input" placeholder="Ex: João Silva" autocomplete="off">
-                
                 <div class="modal-buttons">
                     <button class="btn-modal btn-cancelar" onclick="fecharModal()">Cancelar</button>
                     <button class="btn-modal btn-enviar" onclick="enviarWhatsApp()">Enviar</button>
@@ -492,82 +362,56 @@
     </div>
 
     <script>
-        // ======= ANIMAÇÃO DO NÚMERO 15 NA CAPA =======
         function animar15Anos() {
             const elemento = document.getElementById('contador-idade');
             if (!elemento) return;
-            
             let idade = 1;
             elemento.innerText = idade;
-            
             const intervaloIdade = setInterval(() => {
                 idade++;
                 elemento.innerText = idade;
-                
-                if (idade >= 15) {
-                    clearInterval(intervaloIdade);
-                    setTimeout(animar15Anos, 3000); 
-                }
+                if (idade >= 15) { clearInterval(intervaloIdade); setTimeout(animar15Anos, 3000); }
             }, 100); 
         }
         animar15Anos();
 
-        // ======= ABRIR CONVITE =======
         function abrirConvite() {
             const cover = document.getElementById('coverScreen');
             const musica = document.getElementById('musicaFundo');
             const conteudo = document.getElementById('conteudoInterno');
             
-            // Adiciona a classe que inicia o desenho das flores mágicas no fundo
+            // Ativa o desenho mágico fluido
             document.getElementById('floralBackground').classList.add('start-drawing');
             
             cover.classList.add('open');
             conteudo.classList.add('show');
-            
-            musica.play().catch(function(error) {
-                console.log("Autoplay bloqueado.", error);
-            });
-
+            musica.play().catch(function(error) { console.log("Autoplay bloqueado.", error); });
             criarParticulas();
         }
         
-        // ======= FUNÇÕES DO MODAL =======
         function abrirModal() {
             document.getElementById('modalPresenca').classList.add('active');
-            setTimeout(() => {
-                document.getElementById('nomeConvidado').focus();
-            }, 400);
+            setTimeout(() => { document.getElementById('nomeConvidado').focus(); }, 400);
         }
-        
         function fecharModal() {
             document.getElementById('modalPresenca').classList.remove('active');
             document.getElementById('nomeConvidado').value = "";
         }
-        
         function enviarWhatsApp() {
             const nomeInput = document.getElementById('nomeConvidado').value.trim();
-            
-            if (nomeInput === "") {
-                alert("Por favor, digite seu nome antes de confirmar.");
-                return;
-            }
-            
+            if (nomeInput === "") { alert("Por favor, digite seu nome antes de confirmar."); return; }
             const numeroTelefone = "5519999191494"; 
             const mensagem = `Olá! Eu, *${nomeInput}*, gostaria de confirmar minha presença nos 15 anos da Ana Julia!`;
             const textoCodificado = encodeURIComponent(mensagem);
             const linkWhatsApp = `https://wa.me/${numeroTelefone}?text=${textoCodificado}`;
-            
             fecharModal();
             window.open(linkWhatsApp, '_blank');
         }
 
-        // ======= CONTAGEM REGRESSIVA =======
         const dataAlvo = new Date(`2026-10-16T20:00:00`).getTime();
-
         const intervalo = setInterval(function() {
             const agora = new Date().getTime();
             const distancia = dataAlvo - agora;
-
             if (distancia < 0) {
                 clearInterval(intervalo);
                 document.getElementById('dias').innerText = "00";
@@ -577,29 +421,24 @@
                 document.querySelector('.countdown-title').innerText = "O grande dia chegou!";
                 return;
             }
-
             document.getElementById('dias').innerText = Math.floor(distancia / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById('horas').innerText = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById('minutos').innerText = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
             document.getElementById('segundos').innerText = Math.floor((distancia % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // ======= PARTÍCULAS =======
         function criarParticulas() {
             const container = document.getElementById('scrollArea');
             for (let i = 0; i < 25; i++) {
                 let brilho = document.createElement('div');
                 brilho.className = 'sparkle';
-                
                 let tamanho = Math.random() * 4 + 2; 
                 brilho.style.width = tamanho + 'px';
                 brilho.style.height = tamanho + 'px';
                 brilho.style.left = Math.random() * 100 + '%';
                 brilho.style.bottom = '-50px';
-                
                 brilho.style.animationDelay = Math.random() * 5 + 's';
                 brilho.style.animationDuration = (Math.random() * 4 + 4) + 's'; 
-                
                 if(Math.random() > 0.5) {
                     brilho.style.background = 'var(--prata-brilho)';
                     brilho.style.boxShadow = '0 0 10px var(--prata-brilho)';
@@ -607,11 +446,9 @@
                     brilho.style.background = 'var(--rosa)';
                     brilho.style.boxShadow = '0 0 10px var(--rosa)';
                 }
-
                 container.appendChild(brilho);
             }
         }
     </script>
-
 </body>
 </html>
